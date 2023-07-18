@@ -44,4 +44,9 @@ dependencies {
     implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
     // 腾讯 MMKV 数据存储工具：https://github.com/Tencent/MMKV
     implementation 'com.tencent:mmkv-static:1.2.11'
+    implementation "io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14"
+    //图片加载
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+    //gson
+    implementation "com.google.code.gson:gson:2.8.6"
 }
