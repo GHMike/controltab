@@ -1,0 +1,33 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id but_Save
+id but_connect
+id but_connect_off
+id but_setting
+id button
+id con
+id con_view
+id edit_input
+id ip_Adds
+id port_Num
+id textView
+id textView2
+layout activity_main
+layout activity_port_set
+layout fragment_setting
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string hello_blank_fragment
+style Theme.ControlTab
+xml backup_rules
+xml data_extraction_rules
