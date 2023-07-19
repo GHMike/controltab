@@ -11,6 +11,9 @@ import com.mike.cn.controltab.tools.ConfigHelper
 import com.mike.cn.controltab.tools.FileHelper
 import com.tencent.mmkv.MMKV
 import org.json.JSONObject
+import xyz.doikki.videoplayer.player.AndroidMediaPlayerFactory
+import xyz.doikki.videoplayer.player.VideoViewConfig
+import xyz.doikki.videoplayer.player.VideoViewManager
 
 class MyApp : Application() {
 
@@ -36,11 +39,21 @@ class MyApp : Application() {
         }
 
         MMKV.initialize(instance)
+
+
         LiveEventBus.config() //在没有Observer关联的时候是否自动清除LiveEvent以释放内存（默认值false）
             .autoClear(true) //配置支持跨进程、跨APP通信
             .enableLogger(BuildConfig.DEBUG) //配置LifecycleObserver（如Activity）接收消息的模式： true：整个生命周期（从onCreate到onDestroy）都可以实时收到消息
             //false：激活状态（Started）可以实时收到消息，非激活状态（Stoped）无法实时收到消息，需等到Activity重新变成激活状态，方可收到消息
             .lifecycleObserverAlwaysActive(false)
+
+        VideoViewManager.setConfig(
+            VideoViewConfig.newBuilder()
+                //使用MediaPlayer解码
+                .setPlayerFactory(AndroidMediaPlayerFactory.create())
+                .build()
+        );
+
         val defaultInfo = MMKV.defaultMMKV()
         if (!defaultInfo.getBoolean("init", false)) {
             Log.e("init", "安装 app 第一次初始化配置信息")

@@ -7,44 +7,9 @@
     android:orientation="horizontal"
     tools:context=".ui.fragment.Tab1Fragment">
 
-    <LinearLayout
-        android:id="@+id/v_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:layout_alignParentTop="true"
-        android:padding="1px"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/but1"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="全开2"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/but2"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:text="全关2"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/v_top"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>

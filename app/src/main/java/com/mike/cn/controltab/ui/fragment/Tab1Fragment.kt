@@ -58,9 +58,6 @@ class Tab1Fragment : Fragment(), View.OnClickListener {
 
     fun initData() {
         myAdapter?.setList(ConfigHelper().getConfigMenuList())
-        LiveEventBus.get("tt", Int::class.java).observe(this) {
-            myAdapter?.setList(ConfigHelper().getConfigMenuList())
-        }
     }
 
     companion object {
@@ -78,15 +75,13 @@ class Tab1Fragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.but1 -> {
                 try {
-                    val thread = Thread {
-                        val infoModel = MenuInfoModel(0)
-                        infoModel.code = "MenuInfoModel"
-                        infoModel.name = "又是测试修改"
-                        infoModel.image = "又是测试修改图片"
-                        ConfigHelper().upDataConfigMenuList(infoModel)
-                        LiveEventBus.get<Any>("tt").post(1)
-                    }
-                    thread.start()
+                    val infoModel = MenuInfoModel(0)
+                    infoModel.code = "AE0001EA"
+                    infoModel.name = "又是测试修改"
+                    infoModel.image = "又是测试修改图片"
+                    ConfigHelper().upDataConfigMenuList(infoModel)
+                    myAdapter?.setList(ConfigHelper().getConfigMenuList())
+//                    LiveEventBus.get<Any>("tt").post(1)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

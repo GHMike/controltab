@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.mike.cn.controltab.R
 
-// TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+/**
+ * 空调控制
+ */
 class Tab4Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

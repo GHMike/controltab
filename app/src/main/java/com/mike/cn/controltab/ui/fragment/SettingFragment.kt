@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -21,6 +23,10 @@ class SettingFragment : Fragment(), View.OnClickListener {
     var but1: TextView? = null
     var but2: TextView? = null
 
+    var vPass: View? = null
+    var pass: EditText? = null
+    var butCom: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,8 +41,13 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but1 = con.findViewById(R.id.but1)
         but2 = con.findViewById(R.id.but2)
 
+        vPass = con.findViewById(R.id.v_pass)
+        pass = con.findViewById(R.id.edit_pass)
+        butCom = con.findViewById(R.id.but_com)
+
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
+        butCom?.setOnClickListener(this)
     }
 
 
@@ -66,6 +77,12 @@ class SettingFragment : Fragment(), View.OnClickListener {
             }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (vPass != null)
+            vPass?.visibility = View.VISIBLE
+    }
+
 
     override fun onClick(v: View?) {
 
@@ -76,6 +93,13 @@ class SettingFragment : Fragment(), View.OnClickListener {
                 Toast.makeText(context, "2", Toast.LENGTH_LONG).show()
                 val intent = Intent(context, PortSetActivity::class.java)
                 context?.startActivity(intent)
+            }
+            R.id.but_com -> {
+                if (pass?.text.toString() == ("123456")) {
+                    vPass?.visibility = View.GONE
+                } else {
+                    Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }

@@ -1,20 +1,32 @@
 package com.mike.cn.controltab.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.model.MenuInfoModel
+import com.mike.cn.controltab.tools.ConfigHelper
+import com.mike.cn.controltab.ui.adapters.MenuAdapter
+import com.mike.cn.controltab.ui.dialog.CustomDialog
 
-// TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Tab2Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
+/**
+ * 场景控制
+ */
+class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     private var param1: String? = null
     private var param2: String? = null
+
+    var rvData: RecyclerView? = null
+    var myAdapter: MenuAdapter? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +40,33 @@ class Tab2Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_tab2, container, false)
+        val v = inflater.inflate(R.layout.fragment_tab2, container, false)
+        initW(v)
+        return v
+    }
+
+    fun initW(v: View) {
+        rvData = v.findViewById(R.id.rv_data)
+        rvData?.layoutManager = GridLayoutManager(context, 6)
+        myAdapter = MenuAdapter()
+        rvData?.adapter = myAdapter
+        initData()
+
+        myAdapter?.setOnItemLongClickListener { _, _, position ->
+            showCustomDialog(myAdapter!!.getItem(position))
+            true
+        }
+
+
+    }
+
+    fun initData() {
+        myAdapter?.setList(ConfigHelper().getConfigMenuList())
+    }
+
+    private fun showCustomDialog(data: MenuInfoModel) {
+        val dialog = CustomDialog(context, data, this)
+        dialog.show()
     }
 
     companion object {
@@ -40,5 +78,15 @@ class Tab2Fragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onPositiveButtonClick() {
+        Toast.makeText(context, "onPositiveButtonClick", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNegativeButtonClick(infoModel: MenuInfoModel) {
+        ConfigHelper().upDataConfigMenuList(infoModel)
+        Toast.makeText(context, "保存成功", Toast.LENGTH_LONG).show()
+        initData()
     }
 }

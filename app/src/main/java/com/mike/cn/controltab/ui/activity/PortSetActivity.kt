@@ -5,6 +5,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.app.ConnectConfig.IP_ADDS
+import com.mike.cn.controltab.app.ConnectConfig.PORT_NUM
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.tencent.mmkv.MMKV
 
@@ -32,8 +34,8 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun obtainData() {
-        portNum?.setText(port.getInt("portnum", 9999).toString())
-        ipAdds?.setText(port.getString("ipadds", ""))
+        portNum?.setText(port.getInt(PORT_NUM, 9999).toString())
+        ipAdds?.setText(port.getString(IP_ADDS, ""))
 
     }
 
@@ -58,8 +60,8 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun savePort() {
-        port.putString("ipadds", ipAdds?.text.toString())
-        port.putInt("portnum", portNum?.text.toString().toInt())
+        port.putString(IP_ADDS, ipAdds?.text.toString())
+        port.putInt(PORT_NUM, portNum?.text.toString().toInt())
         Toast.makeText(context, "保存成功", Toast.LENGTH_LONG).show()
         onBackPressed()
     }

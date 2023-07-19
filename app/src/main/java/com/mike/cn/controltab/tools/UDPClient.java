@@ -1,10 +1,14 @@
 package com.mike.cn.controltab.tools;
 
+import static com.mike.cn.controltab.app.ConnectConfig.IP_ADDS;
+import static com.mike.cn.controltab.app.ConnectConfig.PORT_NUM;
+
 import android.content.Intent;
 import android.os.Message;
 import android.util.Log;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.mike.cn.controltab.app.ConnectConfig;
 import com.tencent.mmkv.MMKV;
 
 import java.io.IOException;
@@ -37,8 +41,8 @@ public class UDPClient implements Runnable {
 
     public UDPClient() {
         super();
-        UDP_PORT = MMKV.defaultMMKV().getInt("portnum", 9999);
-        HOST_IP = MMKV.defaultMMKV().getString("ipadds", "");
+        UDP_PORT = MMKV.defaultMMKV().getInt(PORT_NUM, 9999);
+        HOST_IP = MMKV.defaultMMKV().getString(IP_ADDS, "");
     }
 
     /**

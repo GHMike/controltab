@@ -3,48 +3,234 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:gravity="center"
     android:orientation="horizontal"
     tools:context=".ui.fragment.Tab1Fragment">
 
     <LinearLayout
-        android:id="@+id/v_top"
+        android:id="@+id/v_top_t"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        android:layout_alignParentTop="true"
-        android:padding="1px"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="1px">
 
         <TextView
-            android:id="@+id/but1"
+            android:id="@+id/but_p"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
             android:gravity="center"
             android:padding="10dp"
-            android:text="全开4"
-            android:textColor="@color/black"
+            android:text="自动匹配"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/v_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_top_t"
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="1px">
+
+        <TextView
+            android:id="@+id/but_on"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="空调电源开"
+            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/but2"
+            android:id="@+id/but_off"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="空调电源关"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@color/white"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but_jia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
             android:padding="10dp"
-            android:text="全关4"
-            android:textColor="@color/black"
+            android:text="空调温度"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_wd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="22°C"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/but_jian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="空调温度"
+            android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_data"
+    <LinearLayout
+        android:id="@+id/v_zdsf"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/v_top"
-        android:layout_alignParentBottom="true" />
+        android:layout_marginTop="20dp"
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="1px">
+
+        <TextView
+            android:id="@+id/but_zdsf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="自动送风"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/v_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_zdsf"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        android:padding="1px">
+
+        <TextView
+            android:id="@+id/but4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="制热模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="制冷模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="除湿模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="低风模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="中风模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="强风模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="摆风开"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/but11"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher_round"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="摆风关"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
 </RelativeLayout>

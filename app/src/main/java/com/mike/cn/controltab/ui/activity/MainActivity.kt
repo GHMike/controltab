@@ -1,17 +1,24 @@
 package com.mike.cn.controltab.ui.activity
 
+import android.widget.ImageView
 import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.TextClock
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.tools.DateTools
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.mike.cn.controltab.ui.fragment.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : BaseActivity() {
 
 
     var rgMenu: RadioGroup? = null
+    var ivBack: ImageView? = null
+    var textClock: TextClock? = null
+    var tvDay: TextView? = null
     private var indexFragment: Fragment? = null
     var tab1: Stack<Fragment>? = null
     var tab2: Stack<Fragment>? = null
@@ -27,6 +34,9 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         rgMenu = findViewById(R.id.rg_menu)
+        ivBack = findViewById(R.id.iv_back)
+        tvDay = findViewById(R.id.tvDay)
+        textClock = findViewById(R.id.textClock)
 
         tab1 = Stack()
         tab2 = Stack()
@@ -36,9 +46,15 @@ class MainActivity : BaseActivity() {
     }
 
     override fun obtainData() {
+        tvDay?.text = DateTools().getNowDateDayWeek()
+        updateTime()
     }
 
     override fun initEvent() {
+
+        ivBack?.setOnClickListener() {
+            onBackPressed()
+        }
         rgMenu?.setOnCheckedChangeListener { radioGroup, i ->
             when (i) {
                 R.id.rb1 ->
@@ -57,6 +73,15 @@ class MainActivity : BaseActivity() {
         rgMenu?.check(R.id.rb1)
     }
 
+    private fun updateTime() {
+        // 获取当前时间
+        val calendar = Calendar.getInstance()
+        val sdf = SimpleDateFormat("HH:mm:ss EEEE, MMMM dd, yyyy", Locale.getDefault())
+        val currentTime: String = sdf.format(calendar.time)
+
+        // 更新TextView显示的时间
+        textClock?.text = (currentTime)
+    }
 
     /**
      * 显示fragment
