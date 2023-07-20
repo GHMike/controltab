@@ -52,4 +52,6 @@ dependencies {
     implementation "com.google.code.gson:gson:2.8.9"
     //必选，内部默认使用系统mediaplayer进行解码
     implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
+    // PictureSelector 基础 (必须)
+    implementation 'io.github.lucksiege:pictureselector:v3.11.1'
 }

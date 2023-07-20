@@ -61,11 +61,11 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     }
 
     fun initData() {
-        myAdapter?.setList(ConfigHelper().getConfigMenuList())
+        myAdapter?.setList(ConfigHelper().getConfigMenuList("2"))
     }
 
     private fun showCustomDialog(data: MenuInfoModel) {
-        val dialog = CustomDialog(context, data, this)
+        val dialog = CustomDialog(activity, data, this)
         dialog.show()
     }
 
@@ -81,7 +81,7 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     }
 
     override fun onPositiveButtonClick() {
-        Toast.makeText(context, "onPositiveButtonClick", Toast.LENGTH_LONG).show()
+
     }
 
     override fun onNegativeButtonClick(infoModel: MenuInfoModel) {
@@ -89,4 +89,5 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
         Toast.makeText(context, "保存成功", Toast.LENGTH_LONG).show()
         initData()
     }
+
 }

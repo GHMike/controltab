@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_dialog.xml" value="0.319" />
+        <entry key="app/src/main/res/drawable/bg_gradation.xml" value="0.319" />
+        <entry key="app/src/main/res/drawable/bg_gradation_border.xml" value="0.319" />
         <entry key="app/src/main/res/drawable/cb_checking_selector.xml" value="0.3935" />
         <entry key="app/src/main/res/drawable/common_text_select_color_selector.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.2925" />

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="300dp"
+    android:background="@drawable/bg_gradation_border"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -10,12 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
 
         <ImageView
             android:id="@+id/iv_Image"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:padding="2dp"
+            android:background="@drawable/bg_gradation_border"
             android:src="@mipmap/ic_launcher_round" />
 
         <EditText
@@ -23,11 +27,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradation_border"
             android:gravity="center"
+            android:hint="名称"
             android:maxLines="1"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/tv_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_gradation_border"
+            android:gravity="center"
+            android:hint="命令"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 

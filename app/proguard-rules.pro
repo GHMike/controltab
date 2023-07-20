@@ -19,5 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#播放器
 -keep class xyz.doikki.videoplayer.** { *; }
 -dontwarn xyz.doikki.videoplayer.**
+#图片选择
+-keep class com.luck.picture.lib.** { *; }

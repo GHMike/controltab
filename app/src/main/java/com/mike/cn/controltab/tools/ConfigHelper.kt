@@ -16,16 +16,22 @@ open class ConfigHelper {
     /**
      * 获取配置菜单列表
      */
-    open fun getConfigMenuList(): ArrayList<MenuInfoModel> {
+    open fun getConfigMenuList(type: String): ArrayList<MenuInfoModel> {
         try {
             val gson = Gson()
             val string = defaultInfo.decodeString("config", "")
-            val dbVer: ArrayList<MenuInfoModel> = gson.fromJson(
+            val mList: ArrayList<MenuInfoModel> = gson.fromJson(
                 string, object : TypeToken<ArrayList<MenuInfoModel?>?>() {}.type
             )
-            if (dbVer.isNullOrEmpty())
+            if (mList.isNullOrEmpty())
                 return arrayListOf()
-            return dbVer
+
+            val returnList = ArrayList<MenuInfoModel>()
+            for (s in mList) {
+                if (s.type == type)
+                    returnList.add(s)
+            }
+            return if (type.isEmpty()) mList else returnList
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -44,9 +50,10 @@ open class ConfigHelper {
             object : TypeToken<ArrayList<MenuInfoModel?>?>() {}.type
         )
         for (up in list) {
-            if (up.code == upInfo.code) {
+            if (up.id == upInfo.id) {
                 up.name = upInfo.name
                 up.image = upInfo.image
+                up.code = upInfo.code
             }
         }
         val jsonArray = gson.toJson(list)

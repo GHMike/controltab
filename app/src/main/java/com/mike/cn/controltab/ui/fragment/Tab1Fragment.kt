@@ -57,7 +57,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener {
     }
 
     fun initData() {
-        myAdapter?.setList(ConfigHelper().getConfigMenuList())
+        myAdapter?.setList(ConfigHelper().getConfigMenuList("1"))
     }
 
     companion object {
@@ -80,7 +80,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener {
                     infoModel.name = "又是测试修改"
                     infoModel.image = "又是测试修改图片"
                     ConfigHelper().upDataConfigMenuList(infoModel)
-                    myAdapter?.setList(ConfigHelper().getConfigMenuList())
+                    myAdapter?.setList(ConfigHelper().getConfigMenuList("1"))
 //                    LiveEventBus.get<Any>("tt").post(1)
                 } catch (e: Exception) {
                     e.printStackTrace()
