@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,34 +12,45 @@
         android:id="@+id/v_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
         android:layout_alignParentTop="true"
-        android:padding="1px"
-        android:orientation="horizontal">
+        android:background="@color/black"
+        android:orientation="horizontal"
+        android:padding="1px">
 
-        <TextView
+        <com.flyjingfish.gradienttextviewlib.GradientTextView
             android:id="@+id/but1"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_margin="1dp"
             android:layout_weight="1"
-            android:background="@color/white"
             android:gravity="center"
             android:padding="10dp"
             android:text="全开"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:gradient_angle="1"
+            app:gradient_endColor="@color/purple_200"
+            app:gradient_startColor="@color/white"
+            tools:ignore="MissingClass" />
 
-        <TextView
+        <com.flyjingfish.gradienttextviewlib.GradientTextView
             android:id="@+id/but2"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_margin="1dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@color/white"
             android:padding="10dp"
             android:text="全关"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:gradient_angle="1"
+            app:gradient_endColor="@color/white"
+            app:gradient_startColor="@color/purple_200"
+            tools:ignore="MissingClass" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

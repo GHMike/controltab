@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="130dp"
     android:layout_margin="10dp"
-    android:background="@color/cardview_light_background"
+    android:background="@drawable/bg_gradation_border2"
     android:gravity="center"
     tools:context=".MainActivity">
 
@@ -22,15 +23,28 @@
             android:src="@mipmap/ic_launcher_round" />
 
         <TextView
-            android:id="@+id/tv_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:visibility="gone"
             android:text="afasdf"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <com.flyjingfish.gradienttextviewlib.GradientTextView
+            android:id="@+id/tv_Name"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:gradient_angle="1"
+            android:text="name"
+            app:gradient_endColor="@color/white"
+            app:gradient_startColor="@color/teal_200"
+            tools:ignore="MissingClass" />
 
     </LinearLayout>
 

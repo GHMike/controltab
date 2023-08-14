@@ -35,7 +35,6 @@ class IndexActivity : BaseActivity() {
     override fun obtainData() {
         setVideoPlayer()
         videoView!!.start() //开始播放，不调用则不自动播放
-
         Log.e("播放状态", videoView?.currentPlayState.toString())
     }
 

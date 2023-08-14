@@ -54,4 +54,6 @@ dependencies {
     implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
     // PictureSelector 基础 (必须)
     implementation 'io.github.lucksiege:pictureselector:v3.11.1'
+    //渐变字体
+    implementation 'com.github.FlyJingFish:GradientTextView:1.2.2'
 }
