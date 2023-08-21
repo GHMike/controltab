@@ -115,7 +115,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:button="@drawable/ic_baseline_grain_24"
+            android:button="@drawable/ic_baseline_perm_data_setting_24"
             android:gravity="center"
             android:paddingEnd="20dp"
             android:text="设置"

@@ -7,8 +7,10 @@ import android.widget.Toast
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig.IP_ADDS
 import com.mike.cn.controltab.app.ConnectConfig.PORT_NUM
+import com.mike.cn.controltab.tools.UDPClient
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.tencent.mmkv.MMKV
+import java.util.concurrent.Executors
 
 /**
  * 连接端口设置页面
@@ -20,6 +22,7 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
     var portNum: EditText? = null
     var butSave: Button? = null
     val port = MMKV.defaultMMKV()
+    var client: UDPClient? = null
 
     override fun setContentLayout() {
         hideStatusBar()
@@ -63,6 +66,13 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
         port.putString(IP_ADDS, ipAdds?.text.toString())
         port.putInt(PORT_NUM, portNum?.text.toString().toInt())
         Toast.makeText(context, "保存成功", Toast.LENGTH_LONG).show()
+        if (client == null || !client!!.isUdpLife) {
+            //建立线程池
+            val exec = Executors.newCachedThreadPool()
+            client = UDPClient()
+            client?.connect()
+            exec.execute(client)
+        }
         onBackPressed()
     }
 }

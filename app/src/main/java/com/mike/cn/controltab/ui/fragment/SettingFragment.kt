@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.tools.UDPClient
 import com.mike.cn.controltab.ui.activity.PortSetActivity
 
 private const val ARG_PARAM1 = "param1"
@@ -22,6 +23,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
     var but1: TextView? = null
     var but2: TextView? = null
+    var but3: TextView? = null
+    var but4: TextView? = null
 
     var vPass: View? = null
     var pass: EditText? = null
@@ -40,6 +43,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
     fun initW(con: View) {
         but1 = con.findViewById(R.id.but1)
         but2 = con.findViewById(R.id.but2)
+        but3 = con.findViewById(R.id.but3)
+        but4 = con.findViewById(R.id.but4)
 
         vPass = con.findViewById(R.id.v_pass)
         pass = con.findViewById(R.id.edit_pass)
@@ -47,6 +52,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
+        but3?.setOnClickListener(this)
+        but4?.setOnClickListener(this)
         butCom?.setOnClickListener(this)
     }
 
@@ -79,8 +86,10 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        if (vPass != null)
+        if (vPass != null) {
             vPass?.visibility = View.VISIBLE
+            pass?.setText("")
+        }
     }
 
 
@@ -88,11 +97,16 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
         when (v?.id) {
             R.id.but1 ->
-                Toast.makeText(context, "", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "1", Toast.LENGTH_LONG).show()
             R.id.but2 -> {
                 Toast.makeText(context, "2", Toast.LENGTH_LONG).show()
+            }
+            R.id.but3 -> {
                 val intent = Intent(context, PortSetActivity::class.java)
                 context?.startActivity(intent)
+            }
+            R.id.but4 -> {
+                Toast.makeText(context, "4", Toast.LENGTH_LONG).show()
             }
             R.id.but_com -> {
                 if (pass?.text.toString() == ("123456")) {

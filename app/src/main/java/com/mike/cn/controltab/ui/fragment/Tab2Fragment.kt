@@ -1,5 +1,6 @@
 package com.mike.cn.controltab.ui.fragment
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,9 @@ private const val ARG_PARAM2 = "param2"
  * 场景控制
  */
 class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
+
+
+    var mediaPlayer: MediaPlayer? = null
     private var param1: String? = null
     private var param2: String? = null
 
@@ -57,11 +61,13 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
             true
         }
         myAdapter?.setOnItemClickListener() { _, view, position ->
+            playRaw()
             // 缩放动画
             view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
                 view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
             }).start()
         }
+        mediaPlayer = MediaPlayer.create(context, R.raw.tt)
 
 
     }
@@ -96,4 +102,22 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
         initData()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        // 释放MediaPlayer资源
+        if (mediaPlayer != null) {
+            mediaPlayer!!.release()
+            mediaPlayer = null
+        }
+    }
+
+    /**
+     * 播放音效
+     */
+    fun playRaw() {
+        if (mediaPlayer != null) {
+            mediaPlayer!!.seekTo(0)
+            mediaPlayer!!.start()
+        }
+    }
 }

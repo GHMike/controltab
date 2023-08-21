@@ -56,6 +56,7 @@ class MainActivity : BaseActivity() {
             onBackPressed()
         }
         rgMenu?.setOnCheckedChangeListener { radioGroup, i ->
+
             when (i) {
                 R.id.rb1 ->
                     displayFragment(Tab1Fragment.newInstance("", ""), true)
@@ -69,9 +70,11 @@ class MainActivity : BaseActivity() {
                 R.id.rb5 ->
                     displayFragment(SettingFragment.newInstance("", ""), true)
             }
+            playRaw()
         }
         rgMenu?.check(R.id.rb1)
     }
+
 
     private fun updateTime() {
         // 获取当前时间

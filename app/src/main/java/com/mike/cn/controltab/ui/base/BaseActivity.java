@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -21,9 +22,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.mike.cn.controltab.R;
 import com.mike.cn.controltab.app.MyApp;
 import com.mike.cn.controltab.tools.HideNavBarUtil;
 
+import java.io.IOException;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -34,6 +37,8 @@ import java.util.concurrent.TimeUnit;
  * @describe ：基础activity
  */
 public abstract class BaseActivity extends AbstractActivity {
+
+    public MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public abstract class BaseActivity extends AbstractActivity {
         initEvent();//由具体的activity实现，做事件监听的初始化
         HideNavBarUtil.hideWhenSystemUiVisible(this.getWindow().getDecorView());
         HideNavBarUtil.hideBottomUIMenu(this.getWindow().getDecorView());
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.tt);
     }
 
 
@@ -87,8 +93,22 @@ public abstract class BaseActivity extends AbstractActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 释放MediaPlayer资源
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
+    /**
+     * 播放音效
+     */
+    public void playRaw() {
+        if (mediaPlayer != null) {
+            mediaPlayer.seekTo(0);
+            mediaPlayer.start();
+        }
+    }
 
     public Context getContext() {
         return this;
