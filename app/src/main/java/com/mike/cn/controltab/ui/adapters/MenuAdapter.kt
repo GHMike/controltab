@@ -1,6 +1,6 @@
 package com.mike.cn.controltab.ui.adapters
 
-import android.widget.ImageView
+import android.view.View
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -21,6 +21,8 @@ class MenuAdapter() : BaseMultiItemQuickAdapter<MenuInfoModel, BaseViewHolder>()
         holder.setText(R.id.tv_Name, item.name ?: "")
         Glide.with(context).load(item.image).error(R.mipmap.ic_launcher_round)
             .into(holder.getView(R.id.iv_Image))
+
+
 
     }
 

@@ -56,6 +56,12 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
             showCustomDialog(myAdapter!!.getItem(position))
             true
         }
+        myAdapter?.setOnItemClickListener() { _, view, position ->
+            // 缩放动画
+            view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
+                view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+            }).start()
+        }
 
 
     }

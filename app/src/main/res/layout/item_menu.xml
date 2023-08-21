@@ -9,44 +9,51 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/vMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:background="?attr/selectableItemBackground">
 
-        <ImageView
-            android:id="@+id/iv_Image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher_round" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:gravity="center"
-            android:visibility="gone"
-            android:text="afasdf"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <com.flyjingfish.gradienttextviewlib.GradientTextView
-            android:id="@+id/tv_Name"
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:gradient_angle="1"
-            android:text="name"
-            app:gradient_endColor="@color/white"
-            app:gradient_startColor="@color/teal_200"
-            tools:ignore="MissingClass" />
+            <ImageView
+                android:id="@+id/iv_Image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@mipmap/ic_launcher_round" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="afasdf"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
+            <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:gradient_angle="1"
+                app:gradient_endColor="@color/white"
+                app:gradient_startColor="@color/teal_200"
+                tools:ignore="MissingClass" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
