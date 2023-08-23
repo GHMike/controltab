@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.tools.UdpUtil
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -57,6 +58,8 @@ class Tab3Fragment : Fragment() {
             val vv: View = view.findViewById(i)
             viewArray.add(vv)
             vv.setOnClickListener {
+                if (vv.tag != null)
+                    UdpUtil.getInstance().sendUdpCommand(vv.tag.toString())
                 playRaw()
                 // 缩放动画
                 it.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
