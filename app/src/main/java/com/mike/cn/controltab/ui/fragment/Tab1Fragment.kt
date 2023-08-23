@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
+import com.mike.cn.controltab.tools.UdpUtil
 import com.mike.cn.controltab.ui.adapters.MenuAdapter
 import com.mike.cn.controltab.ui.dialog.CustomDialog
 
@@ -63,11 +64,14 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             true
         }
         myAdapter?.setOnItemClickListener() { _, view, position ->
+            UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
             playRaw()
             // 缩放动画
             view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
                 view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
             }).start()
+
+
         }
         initData()
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
