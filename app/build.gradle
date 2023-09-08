@@ -41,6 +41,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
     //liveeventbus 消息总线
     implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
     // 腾讯 MMKV 数据存储工具：https://github.com/Tencent/MMKV
@@ -61,4 +63,7 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport:latest.release'
     //版本更新
     implementation 'io.github.azhon:appupdate:4.3.1'
+
+    //wifi管理
+    implementation("io.github.thanosfisherman.wifiutils:wifiutils:1.6.6")
 }

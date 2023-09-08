@@ -65,13 +65,11 @@ class IndexActivity : BaseActivity() {
             applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
         // 读取文件
         val filePath = "$downloadDirectory/test.mp4" // 替换为实际的文件名
-
-        if (!File(filePath).exists())
+        val path = MMKV.defaultMMKV().getString(VIDEO_PATH, filePath)
+        if (!File(path!!).exists())
             default_iv?.visibility = View.VISIBLE
         else
             default_iv?.visibility = View.GONE
-
-        val path = MMKV.defaultMMKV().getString(VIDEO_PATH, filePath)
         //静音
         videoView?.isMute = true
         //循环播放

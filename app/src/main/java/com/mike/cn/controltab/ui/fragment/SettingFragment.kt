@@ -1,6 +1,5 @@
 package com.mike.cn.controltab.ui.fragment
 
-import android.R.attr
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.azhon.appupdate.manager.DownloadManager
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
@@ -20,8 +18,8 @@ import com.luck.picture.lib.utils.ToastUtils
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.ui.activity.PortSetActivity
-import com.mike.cn.controltab.ui.activity.WifiActivity
 import com.mike.cn.controltab.ui.activity.ScheduleControlActivity
+import com.mike.cn.controltab.ui.activity.WifiActivity
 import com.tencent.mmkv.MMKV
 
 
@@ -130,16 +128,39 @@ class SettingFragment : Fragment(), View.OnClickListener {
                     .setSelectionMode(SelectModeConfig.SINGLE)
                     .forSystemResult(object : OnResultCallbackListener<LocalMedia> {
                         override fun onResult(result: ArrayList<LocalMedia>) {
-                            val paths = result[0]
-                            pathData.putString(ConnectConfig.VIDEO_PATH, paths.path)
-                            Toast.makeText(context, "设置完成", Toast.LENGTH_SHORT).show()
+                            try {
+                                val paths = result[0]
+                                // 获取文件名中最后一个点（.）的位置
+                                val lastIndex: Int = paths.path.lastIndexOf(".")
+                                var fileExtension = ""
+                                if (lastIndex != -1) {
+                                    // 从最后一个点的位置开始截取字符串，得到后缀名
+                                    fileExtension = paths.path.substring(lastIndex + 1)
+                                }
+
+                                if (fileExtension.contains("mp4") || fileExtension.contains("MP4") || fileExtension.contains(
+                                        "avi"
+                                    ) || fileExtension.contains("AVI") ||
+                                    fileExtension.contains("mkv") || fileExtension.contains("MKV") || fileExtension.contains(
+                                        "wmv"
+                                    ) || fileExtension.contains("WMV")
+                                ) {
+                                    pathData.putString(ConnectConfig.VIDEO_PATH, paths.path)
+                                    Toast.makeText(context, "设置完成", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(context, "请选择正确的视频格式", Toast.LENGTH_LONG).show()
+                                }
+
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
                         }
 
                         override fun onCancel() {}
                     })
             }
             R.id.but4 -> {
-                ToastUtils.showToast(context,"已经是最新版本了！")
+                ToastUtils.showToast(context, "已经是最新版本了！")
                 //UpdateInfo信息可以通过版本更新接口获取
 //                val downloadUrl = "https://dx16.198449.com/com.xiaoji.tvbox.apk"
 //                val manager = activity?.let {
