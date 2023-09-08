@@ -1,5 +1,6 @@
 package com.mike.cn.controltab.ui.fragment
 
+import android.R.attr
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,16 +10,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.azhon.appupdate.manager.DownloadManager
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
+import com.luck.picture.lib.utils.ToastUtils
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.ui.activity.PortSetActivity
 import com.mike.cn.controltab.ui.activity.WifiActivity
+import com.mike.cn.controltab.ui.activity.ScheduleControlActivity
 import com.tencent.mmkv.MMKV
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -107,7 +112,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
         when (v?.id) {
             R.id.but1 -> {
-                Toast.makeText(context, "1", Toast.LENGTH_LONG).show()
+                val intent = Intent(context, ScheduleControlActivity::class.java)
+                context?.startActivity(intent)
             }
             R.id.but2 -> {
                 val intent = Intent(context, WifiActivity::class.java)
@@ -133,7 +139,26 @@ class SettingFragment : Fragment(), View.OnClickListener {
                     })
             }
             R.id.but4 -> {
-                Toast.makeText(context, "4", Toast.LENGTH_LONG).show()
+                ToastUtils.showToast(context,"已经是最新版本了！")
+                //UpdateInfo信息可以通过版本更新接口获取
+//                val downloadUrl = "https://dx16.198449.com/com.xiaoji.tvbox.apk"
+//                val manager = activity?.let {
+//                    DownloadManager.Builder(it).run {
+//                        apkUrl(downloadUrl)
+//                        apkName("appupdate.apk")
+//                        smallIcon(R.mipmap.ic_launcher)
+//                        //设置了此参数，那么内部会自动判断是否需要显示更新对话框，否则需要自己判断是否需要更新
+//                        apkVersionCode(attr.versionCode)
+//                        //同时下面三个参数也必须要设置
+//                        apkVersionName(attr.versionName.toString())
+////                        apkSize("7.7MB")
+//                        apkDescription("系统更新")
+//
+//                        //省略一些非必须参数...
+//                        build()
+//                    }
+//                }
+//                manager?.download()
             }
             R.id.but_com -> {
                 if (pass?.text.toString() == ("123456")) {

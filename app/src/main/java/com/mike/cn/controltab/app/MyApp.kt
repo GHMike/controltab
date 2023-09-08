@@ -2,19 +2,15 @@ package com.mike.cn.controltab.app
 
 import android.app.Application
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.mike.cn.controltab.BuildConfig
-import com.mike.cn.controltab.model.MenuInfoModel
-import com.mike.cn.controltab.tools.ConfigHelper
 import com.mike.cn.controltab.tools.FileHelper
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
-import org.json.JSONObject
 import xyz.doikki.videoplayer.player.AndroidMediaPlayerFactory
 import xyz.doikki.videoplayer.player.VideoViewConfig
 import xyz.doikki.videoplayer.player.VideoViewManager
+
 
 class MyApp : Application() {
 
@@ -63,6 +59,6 @@ class MyApp : Application() {
             defaultInfo.encode("config", config)
         }
         //bug ly
-        CrashReport.initCrashReport(getApplicationContext(), "155e1b1332", false);
+        CrashReport.initCrashReport(this, "155e1b1332", false);
     }
 }

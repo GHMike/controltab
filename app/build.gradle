@@ -59,4 +59,6 @@ dependencies {
 
     //错误日志上报
     implementation 'com.tencent.bugly:crashreport:latest.release'
+    //版本更新
+    implementation 'io.github.azhon:appupdate:4.3.1'
 }

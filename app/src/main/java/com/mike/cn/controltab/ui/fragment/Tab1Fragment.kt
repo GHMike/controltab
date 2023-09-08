@@ -102,12 +102,14 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         when (v?.id) {
             R.id.but1 -> {
                 try {
+                    UdpUtil.getInstance().sendUdpCommand("FE AB CE 00")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
             R.id.but2 -> {
                 try {
+                    UdpUtil.getInstance().sendUdpCommand("FE AA CE 00")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

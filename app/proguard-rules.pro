@@ -27,3 +27,6 @@
 
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
