@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.luck.picture.lib.basic.PictureSelector
+import com.luck.picture.lib.config.SelectMimeType
+import com.luck.picture.lib.config.SelectModeConfig
+import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.mike.cn.controltab.R
-import com.mike.cn.controltab.tools.UDPClient
+import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.ui.activity.PortSetActivity
+import com.mike.cn.controltab.ui.activity.WifiActivity
+import com.tencent.mmkv.MMKV
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -20,11 +26,13 @@ private const val ARG_PARAM2 = "param2"
 class SettingFragment : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
+    val pathData = MMKV.defaultMMKV()
 
-    var but1: TextView? = null
-    var but2: TextView? = null
-    var but3: TextView? = null
-    var but4: TextView? = null
+    var but1: View? = null
+    var but2: View? = null
+    var but3: View? = null
+    var but3_1: View? = null
+    var but4: View? = null
 
     var vPass: View? = null
     var pass: EditText? = null
@@ -44,6 +52,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but1 = con.findViewById(R.id.but1)
         but2 = con.findViewById(R.id.but2)
         but3 = con.findViewById(R.id.but3)
+        but3_1 = con.findViewById(R.id.but3_1)
         but4 = con.findViewById(R.id.but4)
 
         vPass = con.findViewById(R.id.v_pass)
@@ -53,6 +62,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
         but3?.setOnClickListener(this)
+        but3_1?.setOnClickListener(this)
         but4?.setOnClickListener(this)
         butCom?.setOnClickListener(this)
     }
@@ -96,14 +106,31 @@ class SettingFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
 
         when (v?.id) {
-            R.id.but1 ->
+            R.id.but1 -> {
                 Toast.makeText(context, "1", Toast.LENGTH_LONG).show()
+            }
             R.id.but2 -> {
-                Toast.makeText(context, "2", Toast.LENGTH_LONG).show()
+                val intent = Intent(context, WifiActivity::class.java)
+                context?.startActivity(intent)
+
             }
             R.id.but3 -> {
                 val intent = Intent(context, PortSetActivity::class.java)
                 context?.startActivity(intent)
+            }
+            R.id.but3_1 -> {
+                PictureSelector.create(this)
+                    .openSystemGallery(SelectMimeType.ofVideo())
+                    .setSelectionMode(SelectModeConfig.SINGLE)
+                    .forSystemResult(object : OnResultCallbackListener<LocalMedia> {
+                        override fun onResult(result: ArrayList<LocalMedia>) {
+                            val paths = result[0]
+                            pathData.putString(ConnectConfig.VIDEO_PATH, paths.path)
+                            Toast.makeText(context, "设置完成", Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onCancel() {}
+                    })
             }
             R.id.but4 -> {
                 Toast.makeText(context, "4", Toast.LENGTH_LONG).show()

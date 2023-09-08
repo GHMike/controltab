@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/activity_index.xml" value="0.3706293706293706" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_port_set.xml" value="0.32447916666666665" />
+        <entry key="app/src/main/res/layout/activity_wifi.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/custom_dialog_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/layout/fragment_tab1.xml" value="0.4298957126303592" />
@@ -24,6 +25,7 @@
         <entry key="app/src/main/res/layout/fragment_tab3.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_tab4.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_menu.xml" value="0.28854166666666664" />
+        <entry key="app/src/main/res/layout/item_wifi.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2925" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2925" />
       </map>

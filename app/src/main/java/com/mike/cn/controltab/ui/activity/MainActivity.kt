@@ -9,6 +9,7 @@ import com.mike.cn.controltab.R
 import com.mike.cn.controltab.tools.DateTools
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.mike.cn.controltab.ui.fragment.*
+import com.tencent.bugly.crashreport.CrashReport
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,7 +52,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initEvent() {
-
         ivBack?.setOnClickListener() {
             onBackPressed()
         }

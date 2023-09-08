@@ -56,4 +56,7 @@ dependencies {
     implementation 'io.github.lucksiege:pictureselector:v3.11.1'
     //渐变字体
     implementation 'com.github.FlyJingFish:GradientTextView:1.2.2'
+
+    //错误日志上报
+    implementation 'com.tencent.bugly:crashreport:latest.release'
 }

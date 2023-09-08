@@ -23,6 +23,7 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
     var butSave: Button? = null
     val port = MMKV.defaultMMKV()
     var client: UDPClient? = null
+    var ivBack: View? = null
 
     override fun setContentLayout() {
         hideStatusBar()
@@ -33,7 +34,9 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
         ipAdds = findViewById(R.id.ip_Adds)
         portNum = findViewById(R.id.port_Num)
         butSave = findViewById(R.id.but_Save)
+        ivBack = findViewById(R.id.iv_back)
         butSave?.setOnClickListener(this)
+        ivBack?.setOnClickListener(this)
     }
 
     override fun obtainData() {
@@ -57,6 +60,9 @@ class PortSetActivity : BaseActivity(), View.OnClickListener {
                     return
                 }
                 savePort()
+            }
+            R.id.iv_back -> {
+                onBackPressed()
             }
 
         }

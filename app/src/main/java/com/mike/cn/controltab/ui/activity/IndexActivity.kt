@@ -79,6 +79,8 @@ class IndexActivity : BaseActivity() {
         //设置满屏
         videoView?.setScreenScaleType(SCREEN_SCALE_MATCH_PARENT)
         videoView!!.setUrl(path) //设置视频地址
+        videoView?.release()
+        videoView?.start()
     }
 
     override fun onDestroy() {
@@ -100,7 +102,7 @@ class IndexActivity : BaseActivity() {
         super.onResume()
         if (videoView != null) {
             setVideoPlayer()
-            videoView?.resume()
+//            videoView?.resume()
         }
     }
 }

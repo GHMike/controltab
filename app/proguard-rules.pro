@@ -24,3 +24,6 @@
 -dontwarn xyz.doikki.videoplayer.**
 #图片选择
 -keep class com.luck.picture.lib.** { *; }
+
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}

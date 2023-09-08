@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/vMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/iv_Image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher_round" />
+
+
+        <com.flyjingfish.gradienttextviewlib.GradientTextView
+            android:id="@+id/tv_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/iv_Image"
+            android:text="name"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:gradient_angle="1"
+            app:gradient_endColor="@color/white"
+            app:gradient_startColor="@color/white"
+            tools:ignore="MissingClass" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

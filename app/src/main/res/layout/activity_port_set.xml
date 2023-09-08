@@ -5,6 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.PortSetActivity">
 
+    <RelativeLayout
+        android:id="@+id/vtop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_back" />
+
+
+        <TextView
+            android:id="@+id/tvDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/con_view"
         android:layout_width="400dp"

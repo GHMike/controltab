@@ -9,6 +9,7 @@ import com.mike.cn.controltab.BuildConfig
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
 import com.mike.cn.controltab.tools.FileHelper
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import org.json.JSONObject
 import xyz.doikki.videoplayer.player.AndroidMediaPlayerFactory
@@ -61,5 +62,7 @@ class MyApp : Application() {
             val config: String = FileHelper().getTxtContent(this, "config.txt")
             defaultInfo.encode("config", config)
         }
+        //bug ly
+        CrashReport.initCrashReport(getApplicationContext(), "155e1b1332", false);
     }
 }
