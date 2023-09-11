@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.luck.picture.lib.basic.PictureSelector;
@@ -42,10 +43,16 @@ public class CustomDialog extends Dialog {
         this.data = data;
     }
 
+    public void setData(MenuInfoModel data) {
+        this.data = data;
+        initData();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_dialog_layout);
+        this.setCancelable(false);
 
         positiveButton = findViewById(R.id.btn_positive);
         negativeButton = findViewById(R.id.btn_negative);
@@ -53,18 +60,34 @@ public class CustomDialog extends Dialog {
         iv_Image = findViewById(R.id.iv_Image);
         tv_code = findViewById(R.id.tv_code);
 
-        tvName.setText(data.getName());
-        tv_code.setText(data.getCode());
-
-        Glide.with(mContext).load(data.getImage()).error(R.mipmap.ic_launcher_round).into(iv_Image);
+        initData();
         iv_Image.setOnClickListener(view -> PictureSelector.create(mContext)
                 .openSystemGallery(SelectMimeType.ofImage()).setSelectionMode(SelectModeConfig.SINGLE)
                 .forSystemResult(new OnResultCallbackListener<LocalMedia>() {
                     @Override
                     public void onResult(ArrayList<LocalMedia> result) {
-                        LocalMedia in = result.get(0);
-                        data.setImage(in.getPath());
-                        Glide.with(mContext).load(in.getPath()).into(iv_Image);
+                        LocalMedia paths = result.get(0);
+
+                        // 获取文件名中最后一个点（.）的位置
+                        int lastIndex = paths.getRealPath().lastIndexOf(".");
+                        String fileExtension = "";
+                        if (lastIndex != -1) {
+                            // 从最后一个点的位置开始截取字符串，得到后缀名
+                            fileExtension = paths.getRealPath().substring(lastIndex + 1);
+                        }
+                        if (fileExtension.contains("jpg") || fileExtension.contains("JPG") || fileExtension.contains(
+                                "jpeg"
+                        ) || fileExtension.contains("JPEG") ||
+                                fileExtension.contains("png") || fileExtension.contains("PNG") || fileExtension.contains(
+                                "gif"
+                        ) || fileExtension.contains("GIF")
+                        ) {
+                            iv_Image.setTag(paths.getRealPath());
+                            Glide.with(mContext).load(paths.getRealPath()).into(iv_Image);
+                        } else {
+                            Toast.makeText(getContext(), "请选择正确的图片格式", Toast.LENGTH_LONG).show();
+                        }
+
                     }
 
                     @Override
@@ -85,11 +108,22 @@ public class CustomDialog extends Dialog {
             if (buttonClickListener != null) {
                 data.setName(tvName.getText().toString());
                 data.setCode(tv_code.getText().toString());
+                data.setImage(iv_Image.getTag() != null ? iv_Image.getTag().toString() : "");
+
                 buttonClickListener.onNegativeButtonClick(data);
             }
             dismiss();
         });
     }
+
+
+    private void initData() {
+        tvName.setText(data.getName());
+        tv_code.setText(data.getCode());
+
+        Glide.with(mContext).load(data.getImage()).error(R.mipmap.ic_launcher_round).into(iv_Image);
+    }
+
 
     public interface OnButtonClickListener {
         void onPositiveButtonClick();

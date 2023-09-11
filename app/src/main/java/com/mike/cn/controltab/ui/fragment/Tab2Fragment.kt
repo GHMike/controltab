@@ -31,6 +31,7 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
 
     var rvData: RecyclerView? = null
     var myAdapter: MenuAdapter? = null
+    var dialog: CustomDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,8 +80,12 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     }
 
     private fun showCustomDialog(data: MenuInfoModel) {
-        val dialog = CustomDialog(activity, data, this)
-        dialog.show()
+        if (dialog == null) {
+            dialog = CustomDialog(activity, data, this)
+        } else {
+            dialog?.setData(data)
+        }
+        dialog?.show()
     }
 
     companion object {
@@ -110,6 +115,9 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
         if (mediaPlayer != null) {
             mediaPlayer!!.release()
             mediaPlayer = null
+        }
+        if (dialog != null && dialog!!.isShowing) {
+            dialog!!.dismiss()
         }
     }
 

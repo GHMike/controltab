@@ -31,6 +31,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     var myAdapter: MenuAdapter? = null
     var but1: TextView? = null
     var but2: TextView? = null
+    var dialog: CustomDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +83,12 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     }
 
     private fun showCustomDialog(data: MenuInfoModel) {
-        val dialog = CustomDialog(activity, data, this)
-        dialog.show()
+        if (dialog == null) {
+            dialog = CustomDialog(activity, data, this)
+        }else{
+            dialog?.setData(data)
+        }
+        dialog?.show()
     }
 
     companion object {
@@ -124,6 +129,9 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         if (mediaPlayer != null) {
             mediaPlayer!!.release()
             mediaPlayer = null
+        }
+        if (dialog != null && dialog!!.isShowing) {
+            dialog!!.dismiss()
         }
     }
 

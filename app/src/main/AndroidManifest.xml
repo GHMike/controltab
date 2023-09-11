@@ -37,14 +37,17 @@
 
         <activity
             android:name=".ui.activity.ScheduleControlActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.WifiActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.IndexActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -55,10 +58,12 @@
         </activity>
         <activity
             android:name=".ui.activity.PortSetActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
             android:screenOrientation="landscape" />
     </application>
