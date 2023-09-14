@@ -15,7 +15,7 @@
         android:id="@+id/default_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/main" />
+        android:background="@mipmap/main" />
 
     <ImageView
         android:id="@+id/v_return"

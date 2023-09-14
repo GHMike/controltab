@@ -107,8 +107,10 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
-
-        when (v?.id) {
+        if (vPass?.visibility == View.VISIBLE && v?.id != R.id.but_com)
+            return
+        animate(v!!)
+        when (v.id) {
             R.id.but1 -> {
                 val intent = Intent(context, ScheduleControlActivity::class.java)
                 context?.startActivity(intent)
@@ -130,12 +132,13 @@ class SettingFragment : Fragment(), View.OnClickListener {
                         override fun onResult(result: ArrayList<LocalMedia>) {
                             try {
                                 val paths = result[0]
+                                val realPath = paths.realPath
                                 // 获取文件名中最后一个点（.）的位置
-                                val lastIndex: Int = paths.path.lastIndexOf(".")
+                                val lastIndex: Int = realPath.lastIndexOf(".")
                                 var fileExtension = ""
                                 if (lastIndex != -1) {
                                     // 从最后一个点的位置开始截取字符串，得到后缀名
-                                    fileExtension = paths.path.substring(lastIndex + 1)
+                                    fileExtension = realPath.substring(lastIndex + 1)
                                 }
 
                                 if (fileExtension.contains("mp4") || fileExtension.contains("MP4") || fileExtension.contains(
@@ -145,7 +148,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
                                         "wmv"
                                     ) || fileExtension.contains("WMV")
                                 ) {
-                                    pathData.putString(ConnectConfig.VIDEO_PATH, paths.path)
+                                    pathData.putString(ConnectConfig.VIDEO_PATH, realPath)
                                     Toast.makeText(context, "设置完成", Toast.LENGTH_SHORT).show()
                                 } else {
                                     Toast.makeText(context, "请选择正确的视频格式", Toast.LENGTH_LONG).show()
@@ -190,5 +193,13 @@ class SettingFragment : Fragment(), View.OnClickListener {
             }
 
         }
+    }
+
+    //播放动画
+    private fun animate(view: View) {
+        // 缩放动画
+        view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
+            view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+        }).start()
     }
 }
