@@ -31,6 +31,7 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         if (null == instance) {
             instance = this
         }

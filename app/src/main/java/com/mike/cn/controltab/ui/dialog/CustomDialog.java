@@ -2,9 +2,15 @@ package com.mike.cn.controltab.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +25,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.interfaces.OnResultCallbackListener;
 import com.mike.cn.controltab.R;
 import com.mike.cn.controltab.model.MenuInfoModel;
+import com.mike.cn.controltab.tools.HideNavBarUtil;
 
 import java.util.ArrayList;
 
@@ -36,11 +43,14 @@ public class CustomDialog extends Dialog {
     private MenuInfoModel data;
     private Context mContext;
 
+
     public CustomDialog(Context context, MenuInfoModel data, OnButtonClickListener listener) {
-        super(context);
+        super(context,R.style.CustomDialog);
         this.buttonClickListener = listener;
         this.mContext = context;
         this.data = data;
+
+        HideNavBarUtil.hideNavigation(this);
     }
 
     public void setData(MenuInfoModel data) {
@@ -131,4 +141,5 @@ public class CustomDialog extends Dialog {
         void onNegativeButtonClick(MenuInfoModel a);
 
     }
+
 }

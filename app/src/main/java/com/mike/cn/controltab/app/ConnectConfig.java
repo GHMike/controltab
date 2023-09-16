@@ -7,6 +7,7 @@ public class ConnectConfig {
      */
     public static final String PORT_NUM = "portnum";
     public static final String IP_ADDS = "ipadds";
+    public static final String IS_EDIT = "IS_EDIT";
 
     public static final String VIDEO_PATH = "video_path";
 

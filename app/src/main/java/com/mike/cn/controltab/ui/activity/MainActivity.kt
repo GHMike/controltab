@@ -1,5 +1,6 @@
 package com.mike.cn.controltab.ui.activity
 
+import android.content.pm.ActivityInfo
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextClock
@@ -115,5 +116,15 @@ class MainActivity : BaseActivity() {
         }
         indexFragment = fragment
         ft.commitAllowingStateLoss()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 }

@@ -1,5 +1,6 @@
 package com.mike.cn.controltab.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.luck.picture.lib.basic.PictureSelector
@@ -17,6 +19,7 @@ import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.luck.picture.lib.utils.ToastUtils
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
+import com.mike.cn.controltab.app.ConnectConfig.IS_EDIT
 import com.mike.cn.controltab.ui.activity.PortSetActivity
 import com.mike.cn.controltab.ui.activity.ScheduleControlActivity
 import com.mike.cn.controltab.ui.activity.WifiActivity
@@ -26,6 +29,7 @@ import com.tencent.mmkv.MMKV
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@SuppressLint("UseSwitchCompatOrMaterialCode")
 class SettingFragment : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
@@ -40,6 +44,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
     var vPass: View? = null
     var pass: EditText? = null
     var butCom: Button? = null
+    var sEdit: Switch? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +66,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
         vPass = con.findViewById(R.id.v_pass)
         pass = con.findViewById(R.id.edit_pass)
         butCom = con.findViewById(R.id.but_com)
+        sEdit = con.findViewById(R.id.s_edit)
 
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
@@ -68,6 +74,13 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but3_1?.setOnClickListener(this)
         but4?.setOnClickListener(this)
         butCom?.setOnClickListener(this)
+
+        val isEdit = MMKV.defaultMMKV().getBoolean(IS_EDIT, false)
+        sEdit?.isChecked = isEdit
+
+        sEdit?.setOnCheckedChangeListener { v, check ->
+            MMKV.defaultMMKV().putBoolean(IS_EDIT, check)
+        }
     }
 
 
@@ -107,9 +120,9 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
+        animate(v!!)
         if (vPass?.visibility == View.VISIBLE && v?.id != R.id.but_com)
             return
-        animate(v!!)
         when (v.id) {
             R.id.but1 -> {
                 val intent = Intent(context, ScheduleControlActivity::class.java)

@@ -31,6 +31,7 @@
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/Theme.ControlTab"
         tools:targetApi="31">
@@ -38,12 +39,12 @@
         <activity
             android:name=".ui.activity.ScheduleControlActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.WifiActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.IndexActivity"
@@ -59,12 +60,12 @@
         <activity
             android:name=".ui.activity.PortSetActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="landscape" />
     </application>
 

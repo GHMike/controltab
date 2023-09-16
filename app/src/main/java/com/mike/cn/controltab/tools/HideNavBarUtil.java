@@ -1,5 +1,6 @@
 package com.mike.cn.controltab.tools;
 
+import android.app.Dialog;
 import android.os.Build;
 import android.view.View;
 
@@ -31,5 +32,23 @@ public class HideNavBarUtil {
         });
     }
 
+    /**
+     * 隐藏导航条
+     *
+     * @param dialog -
+     */
+    public static void hideNavigation(Dialog dialog) {
+        // 全屏展示
+        View decorView = dialog.getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏
+                | View.SYSTEM_UI_FLAG_FULLSCREEN // 隐藏状态栏
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
 
 }

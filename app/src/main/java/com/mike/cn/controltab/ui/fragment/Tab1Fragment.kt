@@ -11,11 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
 import com.mike.cn.controltab.tools.UdpUtil
 import com.mike.cn.controltab.ui.adapters.MenuAdapter
 import com.mike.cn.controltab.ui.dialog.CustomDialog
+import com.mike.cn.controltab.ui.dialog.MyPopupWindow
+import com.tencent.mmkv.MMKV
+import razerdp.basepopup.BasePopupWindow
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -32,6 +37,13 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     var but1: TextView? = null
     var but2: TextView? = null
     var dialog: CustomDialog? = null
+    var mCustomPopWindow: BasePopupWindow? = null
+    var isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
+
+    //临时存储弹窗数据类型
+    var popupWindowDataType = ""
+    var myPopAdapter = MenuAdapter()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +73,20 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         myAdapter = MenuAdapter()
         rvData?.adapter = myAdapter
         myAdapter?.setOnItemLongClickListener { _, _, position ->
-            showCustomDialog(myAdapter!!.getItem(position))
+            if (isEdit)
+                showCustomDialog(myAdapter!!.getItem(position))
             true
         }
-        myAdapter?.setOnItemClickListener() { _, view, position ->
-            UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
+        myAdapter?.setOnItemClickListener() { adapter, view, position ->
+
+            val item = myAdapter?.getItem(position)
+            if (item?.name == "DJ") {
+                showPop(view, "DJ")
+            } else if (item?.name == "沉浸式") {
+                showPop(view, "cjx")
+            } else {
+                UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
+            }
             playRaw()
             // 缩放动画
             view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
@@ -78,6 +99,16 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
     }
 
+
+    fun showPop(v: View, type: String) {
+        //创建并显示popWindow
+        mCustomPopWindow = MyPopupWindow(this)
+        mCustomPopWindow?.setContentView(R.layout.popup_layout)
+        setPopupViewAndData(mCustomPopWindow?.contentView!!, type)
+        mCustomPopWindow?.setBlurBackgroundEnable(true)
+        mCustomPopWindow?.showPopupWindow(v)
+    }
+
     fun initData() {
         myAdapter?.setList(ConfigHelper().getConfigMenuList("1"))
     }
@@ -85,7 +116,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     private fun showCustomDialog(data: MenuInfoModel) {
         if (dialog == null) {
             dialog = CustomDialog(activity, data, this)
-        }else{
+        } else {
             dialog?.setData(data)
         }
         dialog?.show()
@@ -145,12 +176,51 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         }
     }
 
+
+    //设置popup 的控件和数据
+    fun setPopupViewAndData(v: View, type: String) {
+        popupWindowDataType = type
+        val rvPopData: RecyclerView = v.findViewById(R.id.rv_data)
+        rvPopData.layoutManager = GridLayoutManager(context, if (type == "cjx") 5 else 3)
+        myPopAdapter = MenuAdapter()
+        rvPopData.adapter = myPopAdapter
+        myPopAdapter.setOnItemLongClickListener { _, _, position ->
+            if (isEdit)
+                showCustomDialog(myPopAdapter.getItem(position))
+            true
+        }
+        myPopAdapter.setOnItemClickListener() { adapter, view, position ->
+            val item = myPopAdapter.getItem(position)
+            UdpUtil.getInstance().sendUdpCommand(item.code)
+            playRaw()
+            // 缩放动画
+            view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
+                view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+            }).start()
+        }
+
+        myPopAdapter.setList(ConfigHelper().getConfigMenuList(type))
+    }
+
+    /**
+     * 刷新弹窗数据
+     */
+    fun resPopupData() {
+        myPopAdapter.setList(ConfigHelper().getConfigMenuList(popupWindowDataType))
+    }
+
     override fun onPositiveButtonClick() {
     }
 
     override fun onNegativeButtonClick(infoModel: MenuInfoModel) {
         ConfigHelper().upDataConfigMenuList(infoModel)
         Toast.makeText(context, "保存成功", Toast.LENGTH_LONG).show()
+        resPopupData()
         initData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
     }
 }

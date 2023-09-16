@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_gradation_border"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="23dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="10"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="wifi:"
+                android:textColor="#FFFF0000"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/tvName"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:hint="输入密码，如果wifi没有密码，直接点击确定"
+                android:padding="5dp"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/tvMargin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/et_password"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+

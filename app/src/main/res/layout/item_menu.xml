@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="140dp"
     android:layout_margin="10dp"
     android:background="@drawable/bg_gradation_border2"
     android:gravity="center"
@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/iv_Image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@mipmap/ic_launcher_round" />
 
             <TextView

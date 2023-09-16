@@ -23,7 +23,7 @@ open class ConfigHelper {
             val mList: ArrayList<MenuInfoModel> = gson.fromJson(
                 string, object : TypeToken<ArrayList<MenuInfoModel?>?>() {}.type
             )
-            if (mList.isNullOrEmpty())
+            if (mList.isEmpty())
                 return arrayListOf()
 
             val returnList = ArrayList<MenuInfoModel>()

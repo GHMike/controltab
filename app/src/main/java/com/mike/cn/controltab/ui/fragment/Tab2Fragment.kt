@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
 import com.mike.cn.controltab.tools.UdpUtil
 import com.mike.cn.controltab.ui.adapters.MenuAdapter
 import com.mike.cn.controltab.ui.dialog.CustomDialog
+import com.tencent.mmkv.MMKV
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -33,6 +35,7 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     var myAdapter: MenuAdapter? = null
     var dialog: CustomDialog? = null
 
+    var isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +62,8 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
         initData()
 
         myAdapter?.setOnItemLongClickListener { _, _, position ->
-            showCustomDialog(myAdapter!!.getItem(position))
+            if (isEdit)
+                showCustomDialog(myAdapter!!.getItem(position))
             true
         }
         myAdapter?.setOnItemClickListener() { _, view, position ->
@@ -129,5 +133,10 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
             mediaPlayer!!.seekTo(0)
             mediaPlayer!!.start()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
     }
 }

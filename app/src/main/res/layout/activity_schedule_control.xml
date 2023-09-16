@@ -48,10 +48,8 @@
             android:textColor="@color/white"
             android:textSize="100sp"
             android:textStyle="bold"
-            app:gradient_angle="1"
-            app:gradient_endColor="@color/material_dynamic_tertiary30"
-            app:gradient_startColor="@color/material_on_primary_emphasis_high_type"
-            tools:ignore="MissingClass" />
+            app:gradient_endColor="@color/black"
+            app:gradient_startColor="@color/white" />
 
         <SeekBar
             android:id="@+id/seekBar"

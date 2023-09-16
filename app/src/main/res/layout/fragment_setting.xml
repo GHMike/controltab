@@ -4,22 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="horizontal"
     tools:context=".ui.fragment.Tab1Fragment">
 
     <LinearLayout
+        android:id="@+id/v_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:gravity="center"
         android:orientation="horizontal">
-
 
         <LinearLayout
             android:id="@+id/but1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border">
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
                 android:layout_width="match_parent"
@@ -41,7 +43,9 @@
             android:id="@+id/but2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border">
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
                 android:layout_width="0dp"
@@ -64,7 +68,9 @@
             android:id="@+id/but3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border">
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
                 android:layout_width="0dp"
@@ -87,7 +93,9 @@
             android:id="@+id/but3_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border">
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
                 android:layout_width="0dp"
@@ -110,7 +118,9 @@
             android:id="@+id/but4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border">
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
                 android:layout_width="0dp"
@@ -128,6 +138,29 @@
                 app:gradient_startColor="@color/teal_200"
                 tools:ignore="MissingClass" />
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑模式"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/s_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
     </LinearLayout>
 
     <RelativeLayout
