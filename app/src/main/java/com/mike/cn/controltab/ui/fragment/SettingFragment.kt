@@ -112,16 +112,17 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        if (vPass != null) {
-            vPass?.visibility = View.VISIBLE
-            pass?.setText("")
-        }
+//        if (vPass != null) {
+//            vPass?.visibility = View.VISIBLE
+//            pass?.setText("")
+//        }
     }
 
 
     override fun onClick(v: View?) {
         animate(v!!)
-        if (vPass?.visibility == View.VISIBLE && v?.id != R.id.but_com)
+        Thread.sleep(500)
+        if (vPass?.visibility == View.VISIBLE && v.id != R.id.but_com)
             return
         when (v.id) {
             R.id.but1 -> {

@@ -12,4 +12,5 @@ class MenuInfoModel(override val itemType: Int) : MultiItemEntity {
     var name: String? = ""
     var code: String? = ""
     var image: String? = ""
+    var isCone: Boolean? = false
 }

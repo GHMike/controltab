@@ -10,9 +10,9 @@ import com.mike.cn.controltab.R
 import com.mike.cn.controltab.tools.DateTools
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.mike.cn.controltab.ui.fragment.*
-import com.tencent.bugly.crashreport.CrashReport
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : BaseActivity() {
 
@@ -30,6 +30,7 @@ class MainActivity : BaseActivity() {
 
 
     override fun setContentLayout() {
+
         hideStatusBar()
         setContentView(R.layout.activity_main)
     }
@@ -96,7 +97,7 @@ class MainActivity : BaseActivity() {
     fun displayFragment(fragment: Fragment?, isAddToStack: Boolean) {
         if (fragment == null) return
         if (isAddToStack) {
-            when (rgMenu?.getCheckedRadioButtonId()) {
+            when (rgMenu?.checkedRadioButtonId) {
                 R.id.rb1 -> tab1?.push(fragment)
                 R.id.rb2 -> tab2?.push(fragment)
                 R.id.rb3 -> tab3?.push(fragment)
@@ -120,7 +121,7 @@ class MainActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     override fun onResume() {
