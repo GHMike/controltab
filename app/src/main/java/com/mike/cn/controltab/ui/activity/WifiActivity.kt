@@ -135,15 +135,6 @@ class WifiActivity : BaseActivity() {
     //扫描结果回掉
     private fun getScanResults(results: List<WifiData>) {
         swipeRes?.isRefreshing = false
-        // 使用匿名内部类创建一个自定义比较器，按照信号强度降序排序
-//        results.let {
-//            Collections.sort(
-//                it
-//            ) { p0, p1 -> // 降序排序
-//                p1!!.rssi - p0!!.rssi
-//            }
-//        }
-
         wifiAdapter?.setList(results)
     }
 

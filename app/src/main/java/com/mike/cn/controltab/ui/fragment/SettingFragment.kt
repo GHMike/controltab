@@ -112,10 +112,10 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-//        if (vPass != null) {
-//            vPass?.visibility = View.VISIBLE
-//            pass?.setText("")
-//        }
+        if (vPass != null) {
+            vPass?.visibility = View.VISIBLE
+            pass?.setText("")
+        }
     }
 
 
