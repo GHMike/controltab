@@ -3,6 +3,7 @@ package com.mike.cn.controltab.ui.activity
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -12,6 +13,7 @@ import android.net.wifi.WifiManager
 import android.net.wifi.WifiNetworkSpecifier
 import android.net.wifi.WifiNetworkSuggestion
 import android.os.Build
+import android.provider.Settings
 import android.view.*
 import android.widget.EditText
 import android.widget.Switch
@@ -94,6 +96,10 @@ class WifiActivity : BaseActivity() {
         rvDataView?.layoutManager = LinearLayoutManager(context)
         rvDataView?.addItemDecoration(DividerItemDecoration(this, 1))
         rvDataView?.adapter = wifiAdapter
+        mWifiHelp?.setWifiEnabled(true)
+        val wifiSettingsIntent = Intent(Settings.ACTION_WIFI_SETTINGS)
+        startActivity(wifiSettingsIntent)
+
 
 
         swipeRes?.setColorSchemeColors(ContextCompat.getColor(this, R.color.colorPrimary));
