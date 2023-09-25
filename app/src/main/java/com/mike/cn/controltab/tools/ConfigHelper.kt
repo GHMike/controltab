@@ -1,9 +1,15 @@
 package com.mike.cn.controltab.tools
 
+import android.annotation.SuppressLint
+import android.os.Build
+import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.internal.bind.TypeAdapters.UUID
 import com.google.gson.reflect.TypeToken
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.tencent.mmkv.MMKV
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * 获取配置信息助手
@@ -12,6 +18,10 @@ open class ConfigHelper {
 
 
     val defaultInfo = MMKV.defaultMMKV()
+
+    final val TAG1 = "6916457002358";
+    final val TAG2 = "xiaoMai";
+    final val TAG3 = "zhiNeng";
 
     /**
      * 获取配置菜单列表
@@ -59,4 +69,50 @@ open class ConfigHelper {
         val jsonArray = gson.toJson(list)
         defaultInfo.encode("config", jsonArray.toString())
     }
+
+    @SuppressLint("MissingPermission", "HardwareIds")
+    open fun getUUID(): String? {
+        var serial = ""
+        val m_szDevIDShort =
+            "71" + Build.BOARD.length % 10 + Build.BRAND.length % 10 + Build.DEVICE.length % 10 + Build.DISPLAY.length % 10 + Build.HOST.length % 10 + Build.ID.length % 10 + Build.MANUFACTURER.length % 10 + Build.MODEL.length % 10 + Build.PRODUCT.length % 10 + Build.TAGS.length % 10 + Build.TYPE.length % 10 + Build.USER.length % 10 //12 位
+        try {
+            serial = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Build.getSerial()
+            } else {
+                Build.SERIAL
+            }
+            //API>=9 使用serial号
+            return UUID(m_szDevIDShort.hashCode().toLong(), serial.hashCode().toLong()).toString()
+        } catch (exception: java.lang.Exception) {
+            //serial需要一个初始化
+            serial = TAG1 // 随便一个初始化
+        }
+        //使用硬件信息拼凑出来的15位号码
+        return UUID(m_szDevIDShort.hashCode().toLong(), serial.hashCode().toLong()).toString()
+    }
+
+
+    /**
+     * 获取用户所知的设备 ID
+     */
+    open fun getEnCode(): String? {
+        var code = getUUID()
+        val strList: List<String>
+        if (code?.isNotEmpty() == true) {
+            strList = code.split("-")
+            if (strList.size > 2)
+                code = strList[1] + strList[2]
+        }
+        return code
+    }
+
+    /**
+     * 验证激活码
+     */
+    open fun verifyCode(code: String): Boolean? {
+        val t = Base64Util.encode(TAG2 + getEnCode() + TAG3)
+        Log.e("激活码", t)
+        return t.equals(code)
+    }
+
 }

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.app.ConnectConfig.IS_ACTIVATE
 import com.mike.cn.controltab.app.ConnectConfig.VIDEO_PATH
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.tencent.mmkv.MMKV
@@ -16,9 +17,9 @@ import java.io.File
 
 class IndexActivity : BaseActivity() {
 
-    var videoView: VideoView? = null
-    var vReturn: ImageView? = null
-    var default_iv: ImageView? = null
+    private var videoView: VideoView? = null
+    private var vReturn: ImageView? = null
+    private var default_iv: ImageView? = null
 
 
     override fun setContentLayout() {
@@ -27,6 +28,14 @@ class IndexActivity : BaseActivity() {
     }
 
     override fun initView() {
+        val mmkv = MMKV.defaultMMKV()
+        if (!mmkv.getBoolean(IS_ACTIVATE, false)) {
+            val intent = Intent(this, ActivateActivity::class.java)
+            // 设置标志以关闭所有 Activity 并将新 Activity 设为任务的根 Activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
         videoView = findViewById(R.id.player)
         vReturn = findViewById(R.id.v_return)
         default_iv = findViewById(R.id.default_iv)
@@ -51,7 +60,6 @@ class IndexActivity : BaseActivity() {
         vReturn?.setOnClickListener() {
             finish()
         }
-
     }
 
 
