@@ -3,14 +3,12 @@ package com.mike.cn.controltab.ui.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Switch
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
@@ -18,6 +16,7 @@ import com.luck.picture.lib.config.SelectModeConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.luck.picture.lib.utils.ToastUtils
+import com.mike.cn.controltab.BuildConfig
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.app.ConnectConfig.IS_EDIT
@@ -30,7 +29,7 @@ import com.tencent.mmkv.MMKV
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-@SuppressLint("UseSwitchCompatOrMaterialCode")
+@SuppressLint("UseSwitchCompatOrMaterialCode,SetTextI18n")
 class SettingFragment : Fragment(), View.OnClickListener {
     private var param1: String? = null
     private var param2: String? = null
@@ -46,6 +45,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
     var pass: EditText? = null
     var butCom: Button? = null
     var sEdit: Switch? = null
+    var ver: TextView? = null
 
 
     var mediaPlayer: MediaPlayer? = null
@@ -57,7 +57,6 @@ class SettingFragment : Fragment(), View.OnClickListener {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        initData()
     }
 
     fun initW(con: View) {
@@ -71,6 +70,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
         pass = con.findViewById(R.id.edit_pass)
         butCom = con.findViewById(R.id.but_com)
         sEdit = con.findViewById(R.id.s_edit)
+        ver = con.findViewById(R.id.ver)
 
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
@@ -87,11 +87,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
         }
 
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
-    }
 
-
-    fun initData() {
-
+        ver?.text = "V${BuildConfig.VERSION_NAME}"
     }
 
 
