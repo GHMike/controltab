@@ -2,6 +2,7 @@ package com.mike.cn.controltab.ui.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +47,9 @@ class SettingFragment : Fragment(), View.OnClickListener {
     var butCom: Button? = null
     var sEdit: Switch? = null
 
+
+    var mediaPlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -81,6 +85,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
         sEdit?.setOnCheckedChangeListener { v, check ->
             MMKV.defaultMMKV().putBoolean(IS_EDIT, check)
         }
+
+        mediaPlayer = MediaPlayer.create(context, R.raw.tt)
     }
 
 
@@ -120,10 +126,9 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
-        animate(v!!)
-        Thread.sleep(500)
-        if (vPass?.visibility == View.VISIBLE && v.id != R.id.but_com)
+        if (vPass?.visibility == View.VISIBLE && v?.id != R.id.but_com)
             return
+        animate(v!!)
         when (v.id) {
             R.id.but1 -> {
                 val intent = Intent(context, ScheduleControlActivity::class.java)
@@ -215,5 +220,26 @@ class SettingFragment : Fragment(), View.OnClickListener {
         view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
             view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
         }).start()
+
+        playRaw()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // 释放MediaPlayer资源
+        if (mediaPlayer != null) {
+            mediaPlayer!!.release()
+            mediaPlayer = null
+        }
+    }
+
+    /**
+     * 播放音效
+     */
+    fun playRaw() {
+        if (mediaPlayer != null) {
+            mediaPlayer!!.seekTo(0)
+            mediaPlayer!!.start()
+        }
     }
 }
