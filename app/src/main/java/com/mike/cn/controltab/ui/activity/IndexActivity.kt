@@ -89,6 +89,10 @@ class IndexActivity : BaseActivity() {
         videoView?.start()
     }
 
+    override fun onBackPressed() {
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (videoView != null) {

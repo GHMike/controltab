@@ -54,6 +54,7 @@
             android:name=".ui.activity.IndexActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
+            android:theme="@style/NoSwipeBackTheme"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

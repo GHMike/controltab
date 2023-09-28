@@ -21,6 +21,10 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="NoSwipeBackTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowSwipeToDismiss">false</item>
+        <!-- 其他主题属性 -->
+    </style>
 
     <style name="CustomDialog">
         <item name="android:windowIsFloating">true</item>

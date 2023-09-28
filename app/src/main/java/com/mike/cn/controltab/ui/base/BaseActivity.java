@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Window;
@@ -25,6 +26,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.mike.cn.controltab.R;
 import com.mike.cn.controltab.app.MyApp;
 import com.mike.cn.controltab.tools.HideNavBarUtil;
+import com.mike.cn.controltab.ui.activity.IndexActivity;
 
 import java.io.IOException;
 import java.util.TimerTask;
@@ -146,11 +148,15 @@ public abstract class BaseActivity extends AbstractActivity {
                 if (mOnKeyClickListener != null) {//如果没有设置返回事件的监听，则默认finish页面。
                     mOnKeyClickListener.clickBack();
                 } else {
+                    if (this instanceof IndexActivity) {
+                        return false;
+                    }
                     finish();
                 }
                 return true;
             default:
-                return super.onKeyDown(keyCode, event);
+                Log.d("fanhui", "");
+                return false;
         }
     }
 

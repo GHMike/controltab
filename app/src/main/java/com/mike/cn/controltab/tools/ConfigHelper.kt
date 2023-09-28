@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.internal.bind.TypeAdapters.UUID
 import com.google.gson.reflect.TypeToken
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.tencent.mmkv.MMKV
+import java.security.MessageDigest
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * 获取配置信息助手
@@ -110,9 +109,26 @@ open class ConfigHelper {
      * 验证激活码
      */
     open fun verifyCode(code: String): Boolean? {
-        val t = Base64Util.encode(TAG2 + getEnCode() + TAG3)
+        var t: String = Base64Util.encode(TAG2 + getEnCode() + TAG3)
+        try {
+            // 创建 MessageDigest 对象并指定算法为 MD5
+            val md: MessageDigest = MessageDigest.getInstance("MD5")
+            // 将输入字符串转换为字节数组
+            val inputBytes: ByteArray = t.toByteArray()
+            // 计算 MD5 散列值
+            val md5Bytes: ByteArray = md.digest(inputBytes)
+
+            // 将字节数组转换为十六进制字符串
+            val sb = StringBuilder()
+            for (b in md5Bytes) {
+                sb.append(String.format("%02x", b))
+            }
+            t = sb.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         Log.e("激活码", t)
-        return t.equals(code)
+        return t == code
     }
 
 }
