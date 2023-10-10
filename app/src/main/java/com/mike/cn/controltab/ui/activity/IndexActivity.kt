@@ -1,6 +1,10 @@
 package com.mike.cn.controltab.ui.activity
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Environment
 import android.util.Log
 import android.view.View
@@ -35,6 +39,7 @@ class IndexActivity : BaseActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+        requestBootPermission()
 
         videoView = findViewById(R.id.player)
         vReturn = findViewById(R.id.v_return)
@@ -92,6 +97,18 @@ class IndexActivity : BaseActivity() {
     override fun onBackPressed() {
 
     }
+
+    // 请求 RECEIVE_BOOT_COMPLETED 权限
+    private fun requestBootPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val permission = checkSelfPermission(Manifest.permission.RECEIVE_BOOT_COMPLETED)
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 如果权限没有授予，则请求权限
+                requestPermissions(arrayOf(Manifest.permission.RECEIVE_BOOT_COMPLETED), 1)
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

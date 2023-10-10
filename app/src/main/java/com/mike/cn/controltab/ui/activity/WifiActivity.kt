@@ -97,8 +97,8 @@ class WifiActivity : BaseActivity() {
         rvDataView?.addItemDecoration(DividerItemDecoration(this, 1))
         rvDataView?.adapter = wifiAdapter
         mWifiHelp?.setWifiEnabled(true)
-        val wifiSettingsIntent = Intent(Settings.ACTION_WIFI_SETTINGS)
-        startActivity(wifiSettingsIntent)
+//        val wifiSettingsIntent = Intent(Settings.ACTION_WIFI_SETTINGS)
+//        startActivity(wifiSettingsIntent)
 
 
 
@@ -163,8 +163,12 @@ class WifiActivity : BaseActivity() {
         dialog!!.show()
         val tvName: TextView = dialog!!.findViewById(R.id.tvName)
         val tvMargin: TextView = dialog!!.findViewById(R.id.tvMargin)
+        val tvCancel: TextView = dialog!!.findViewById(R.id.tvCancel)
         val et_password: EditText = dialog!!.findViewById(R.id.et_password)
         tvName.text = "wifi：${wifiInfo.ssid}"
+        tvCancel.setOnClickListener {
+            dialog!!.dismiss()
+        }
         tvMargin.setOnClickListener { //确定
             mWifiHelp?.connect(wifiInfo, et_password.text.toString())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

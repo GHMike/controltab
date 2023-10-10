@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/drawable/seekBarBg.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/text_color_select.xml" value="0.407" />
         <entry key="app/src/main/res/layout/activity_activate.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/activity_exper_set.xml" value="0.5348958333333333" />
         <entry key="app/src/main/res/layout/activity_index.xml" value="0.3706293706293706" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_port_set.xml" value="0.32447916666666665" />
@@ -25,6 +26,7 @@
         <entry key="app/src/main/res/layout/activity_wifi.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/custom_dialog_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/dialog_centre.xml" value="0.2841025641025641" />
+        <entry key="app/src/main/res/layout/dialog_custom_pass.xml" value="0.5348958333333333" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.32447916666666665" />
         <entry key="app/src/main/res/layout/fragment_tab1.xml" value="0.4298957126303592" />
         <entry key="app/src/main/res/layout/fragment_tab2.xml" value="0.4298957126303592" />

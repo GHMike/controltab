@@ -63,7 +63,6 @@
                 app:gradient_startColor="@color/teal_200"
                 tools:ignore="MissingClass" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/but3"
             android:layout_width="0dp"
@@ -79,32 +78,7 @@
                 android:drawableTop="@mipmap/ic_launcher_round"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="端口设置"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:gradient_angle="1"
-                app:gradient_endColor="@color/white"
-                app:gradient_startColor="@color/teal_200"
-                tools:ignore="MissingClass" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/but3_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_w_border">
-
-            <com.flyjingfish.gradienttextviewlib.GradientTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableTop="@mipmap/ic_launcher_round"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="视频设置"
+                android:text="高级设置"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -139,29 +113,35 @@
                 tools:ignore="MissingClass" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/but5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border">
+
+            <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_launcher_round"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="重置配置"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:gradient_angle="1"
+                app:gradient_endColor="@color/white"
+                app:gradient_startColor="@color/teal_200"
+                tools:ignore="MissingClass" />
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:padding="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="编辑模式"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <Switch
-            android:id="@+id/s_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/v_pass"

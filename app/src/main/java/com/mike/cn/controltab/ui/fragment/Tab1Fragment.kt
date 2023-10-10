@@ -28,21 +28,23 @@ private const val ARG_PARAM2 = "param2"
 class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClickListener {
 
 
-    var mediaPlayer: MediaPlayer? = null
+    private var mediaPlayer: MediaPlayer? = null
     private var param1: String? = null
     private var param2: String? = null
 
-    var rvData: RecyclerView? = null
-    var myAdapter: MenuAdapter? = null
-    var but1: TextView? = null
-    var but2: TextView? = null
-    var dialog: CustomDialog? = null
-    var mCustomPopWindow: BasePopupWindow? = null
-    var isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
+    private var rvData: RecyclerView? = null
+    private var myAdapter: MenuAdapter? = null
+    private var but1: TextView? = null
+    private var but2: TextView? = null
+    private var but3: View? = null
+    private var but4: View? = null
+    private var dialog: CustomDialog? = null
+    private var mCustomPopWindow: BasePopupWindow? = null
+    private var isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
 
     //临时存储弹窗数据类型
-    var popupWindowDataType = ""
-    var myPopAdapter = MenuAdapter()
+    private var popupWindowDataType = ""
+    private var myPopAdapter = MenuAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,36 +65,46 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     }
 
 
-    fun initW(v: View) {
+    private fun initW(v: View) {
         rvData = v.findViewById(R.id.rv_data)
         but1 = v.findViewById(R.id.but1)
         but2 = v.findViewById(R.id.but2)
+        but3 = v.findViewById(R.id.but3)
+        but4 = v.findViewById(R.id.but4)
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
+        but3?.setOnClickListener(this)
+        but4?.setOnClickListener(this)
         rvData?.layoutManager = GridLayoutManager(context, 3)
         myAdapter = MenuAdapter()
         rvData?.adapter = myAdapter
         myAdapter?.setOnItemLongClickListener { _, _, position ->
-            if (isEdit)
-                showCustomDialog(myAdapter!!.getItem(position))
+            val item = myAdapter?.getItem(position)
+            if (isEdit) {
+                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
+                    showCustomDialog(myAdapter!!.getItem(position))
+                }
+            }
             true
         }
         myAdapter?.setOnItemClickListener() { adapter, view, position ->
-
             val item = myAdapter?.getItem(position)
-            if (item?.name == "DJ") {
-                showPop(view, "DJ")
-            } else if (item?.name == "沉浸式") {
-                showPop(view, "cjx")
-            } else {
-                UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
+            when (item?.id) {
+                "1" -> {
+                    showPop(view, "kg")
+                }
+                "5" -> {
+                    showPop(view, "DJ")
+                }
+                "6" -> {
+                    showPop(view, "cjx")
+                }
+                else -> {
+                    UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
+                }
             }
             playRaw()
-            // 缩放动画
-            view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
-                view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
-            }).start()
-
+            playAn(view)
 
         }
         initData()
@@ -100,7 +112,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     }
 
 
-    fun showPop(v: View, type: String) {
+    private fun showPop(v: View, type: String) {
         //创建并显示popWindow
         mCustomPopWindow = MyPopupWindow(this)
         mCustomPopWindow?.setContentView(R.layout.popup_layout)
@@ -109,7 +121,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         mCustomPopWindow?.showPopupWindow(v)
     }
 
-    fun initData() {
+    private fun initData() {
         myAdapter?.setList(ConfigHelper().getConfigMenuList("1"))
     }
 
@@ -150,6 +162,16 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
                     e.printStackTrace()
                 }
             }
+            R.id.but3 -> {
+                playRaw()
+                playAn(v)
+                showPop(v, "hzh")
+            }
+            R.id.but4 -> {
+                playRaw()
+                playAn(v)
+                showPop(v, "yykz")
+            }
 
         }
     }
@@ -169,19 +191,33 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     /**
      * 播放音效
      */
-    fun playRaw() {
+    private fun playRaw() {
         if (mediaPlayer != null) {
             mediaPlayer!!.seekTo(0)
             mediaPlayer!!.start()
         }
     }
 
+    /**
+     * 播放动画
+     */
+    private fun playAn(view: View) {
+        // 缩放动画
+        view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
+            view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+        }).start()
+    }
+
 
     //设置popup 的控件和数据
-    fun setPopupViewAndData(v: View, type: String) {
+    private fun setPopupViewAndData(v: View, type: String) {
         popupWindowDataType = type
         val rvPopData: RecyclerView = v.findViewById(R.id.rv_data)
-        rvPopData.layoutManager = GridLayoutManager(context, if (type == "cjx") 5 else 3)
+        rvPopData.layoutManager =
+            GridLayoutManager(
+                context,
+                if (type == "cjx" || type == "kg" || type == "yykz") 5 else 3
+            )
         myPopAdapter = MenuAdapter()
         rvPopData.adapter = myPopAdapter
         myPopAdapter.setOnItemLongClickListener { _, _, position ->
@@ -193,10 +229,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             val item = myPopAdapter.getItem(position)
             UdpUtil.getInstance().sendUdpCommand(item.code)
             playRaw()
-            // 缩放动画
-            view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
-                view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
-            }).start()
+            playAn(view)
         }
 
         myPopAdapter.setList(ConfigHelper().getConfigMenuList(type))
@@ -205,7 +238,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     /**
      * 刷新弹窗数据
      */
-    fun resPopupData() {
+    private fun resPopupData() {
         myPopAdapter.setList(ConfigHelper().getConfigMenuList(popupWindowDataType))
     }
 

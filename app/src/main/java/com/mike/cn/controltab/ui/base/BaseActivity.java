@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -110,6 +111,15 @@ public abstract class BaseActivity extends AbstractActivity {
             mediaPlayer.seekTo(0);
             mediaPlayer.start();
         }
+    }
+
+    //播放动画
+    public void playAnimate(View view) {
+        // 缩放动画
+        view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(() ->
+                view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start());
+        view.animate().start();
+        playRaw();
     }
 
     public Context getContext() {

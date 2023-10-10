@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.tools.UdpUtil
 
@@ -20,6 +21,7 @@ class Tab4Fragment : Fragment() {
     var mediaPlayer: MediaPlayer? = null
     private var param1: String? = null
     private var param2: String? = null
+    private var tv_wd: TextView? = null
     private var viewArrayId = arrayOf(
         R.id.but_p,
         R.id.but_on,
@@ -56,12 +58,14 @@ class Tab4Fragment : Fragment() {
     }
 
     fun initView(view: View) {
+        tv_wd = view.findViewById(R.id.tv_wd)
         for (i in viewArrayId) {
             val vv: View = view.findViewById(i)
             viewArray.add(vv)
             vv.setOnClickListener {
                 if (vv.tag != null)
                     UdpUtil.getInstance().sendUdpCommand(vv.tag.toString())
+                weShow(vv)
                 playRaw()
                 // 缩放动画
                 it.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
@@ -72,6 +76,24 @@ class Tab4Fragment : Fragment() {
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
 
     }
+
+
+    /**
+     * 如果是温度加减就操作显示
+     */
+    private fun weShow(v: View) {
+        var wd = tv_wd?.text.toString().toInt()
+        if (v.id == R.id.but_jia) {
+            if (wd < 32)
+                wd++
+        } else if (v.id == R.id.but_jian) {
+            if (wd > 16)
+                wd--
+        }
+        tv_wd?.text = wd.toString()
+
+    }
+
 
     companion object {
         @JvmStatic

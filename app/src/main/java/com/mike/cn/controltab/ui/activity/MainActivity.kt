@@ -60,17 +60,19 @@ class MainActivity : BaseActivity() {
         rgMenu?.setOnCheckedChangeListener { radioGroup, i ->
 
             when (i) {
-                R.id.rb1 ->
-                    displayFragment(Tab1Fragment.newInstance("", ""), true)
+                R.id.rb1 -> {
+
+                    displayFragment(Tab1Fragment.newInstance("", ""), false)
+                }
                 R.id.rb2 -> {
-                    displayFragment(Tab2Fragment.newInstance("", ""), true)
+                    displayFragment(Tab2Fragment.newInstance("", ""), false)
                 }
                 R.id.rb3 ->
-                    displayFragment(Tab3Fragment.newInstance("", ""), true)
+                    displayFragment(Tab3Fragment.newInstance("", ""), false)
                 R.id.rb4 ->
-                    displayFragment(Tab4Fragment.newInstance("", ""), true)
+                    displayFragment(Tab4Fragment.newInstance("", ""), false)
                 R.id.rb5 ->
-                    displayFragment(SettingFragment.newInstance("", ""), true)
+                    displayFragment(SettingFragment.newInstance("", ""), false)
             }
             playRaw()
         }
@@ -98,11 +100,41 @@ class MainActivity : BaseActivity() {
         if (fragment == null) return
         if (isAddToStack) {
             when (rgMenu?.checkedRadioButtonId) {
-                R.id.rb1 -> tab1?.push(fragment)
-                R.id.rb2 -> tab2?.push(fragment)
-                R.id.rb3 -> tab3?.push(fragment)
-                R.id.rb4 -> tab4?.push(fragment)
-                R.id.rb5 -> tab5?.push(fragment)
+                R.id.rb1 -> {
+                    if (tab1?.size!! > 0) {
+                        tab1?.peek()
+                    } else {
+                        tab1?.push(fragment)
+                    }
+                }
+                R.id.rb2 -> {
+                    if (tab2?.size!! > 0) {
+                        tab2?.peek()
+                    } else {
+                        tab2?.push(fragment)
+                    }
+                }
+                R.id.rb3 -> {
+                    if (tab3?.size!! > 0) {
+                        tab3?.peek()
+                    } else {
+                        tab3?.push(fragment)
+                    }
+                }
+                R.id.rb4 -> {
+                    if (tab4?.size!! > 0) {
+                        tab4?.peek()
+                    } else {
+                        tab4?.push(fragment)
+                    }
+                }
+                R.id.rb5 -> {
+                    if (tab5?.size!! > 0) {
+                        tab5?.peek()
+                    } else {
+                        tab5?.push(fragment)
+                    }
+                }
             }
         }
         val fm = supportFragmentManager

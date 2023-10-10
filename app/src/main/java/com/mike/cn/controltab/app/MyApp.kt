@@ -1,8 +1,13 @@
 package com.mike.cn.controltab.app
 
+import android.Manifest
 import android.app.Application
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.mike.cn.controltab.BootReceiver
 import com.mike.cn.controltab.BuildConfig
 import com.mike.cn.controltab.tools.FileHelper
 import com.tencent.bugly.crashreport.CrashReport
@@ -61,5 +66,8 @@ class MyApp : Application() {
         }
         //bug ly
         CrashReport.initCrashReport(this, "155e1b1332", false);
+
     }
+
+
 }

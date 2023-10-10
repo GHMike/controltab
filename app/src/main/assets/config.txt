@@ -236,5 +236,97 @@
     "name": "沉浸式5",
     "code": "FE 34 CE 00",
     "image": ""
+  },
+  {
+    "id": "35",
+    "type": "kg",
+    "name": "K歌1",
+    "code": "FE A6 CE 00",
+    "image": ""
+  },
+  {
+    "id": "36",
+    "type": "kg",
+    "name": "K歌2",
+    "code": "FE A6 CE 00",
+    "image": ""
+  },
+  {
+    "id": "37",
+    "type": "kg",
+    "name": "K歌3",
+    "code": "FE A6 CE 00",
+    "image": ""
+  },
+  {
+    "id": "38",
+    "type": "kg",
+    "name": "K歌4",
+    "code": "FE A6 CE 00",
+    "image": ""
+  },
+  {
+    "id": "39",
+    "type": "kg",
+    "name": "K歌5",
+    "code": "FE A6 CE 00",
+    "image": ""
+  },
+  {
+    "id": "40",
+    "type": "hzh",
+    "name": "开窗",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "41",
+    "type": "hzh",
+    "name": "透明",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "42",
+    "type": "hzh",
+    "name": " 关窗",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "43",
+    "type": "yykz",
+    "name": "碟机",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "44",
+    "type": "yykz",
+    "name": "点歌机",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "45",
+    "type": "yykz",
+    "name": "外置",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "46",
+    "type": "yykz",
+    "name": "效果器输出",
+    "code": "",
+    "image": ""
+  },
+  {
+    "id": "47",
+    "type": "yykz",
+    "name": "处理器输出",
+    "code": "",
+    "image": ""
   }
+
 ]

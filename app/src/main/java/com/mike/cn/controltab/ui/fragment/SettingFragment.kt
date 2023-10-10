@@ -5,10 +5,12 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
@@ -20,9 +22,13 @@ import com.mike.cn.controltab.BuildConfig
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.app.ConnectConfig.IS_EDIT
+import com.mike.cn.controltab.app.MyApp
+import com.mike.cn.controltab.tools.FileHelper
+import com.mike.cn.controltab.ui.activity.ExpertSettingActivity
 import com.mike.cn.controltab.ui.activity.PortSetActivity
 import com.mike.cn.controltab.ui.activity.ScheduleControlActivity
 import com.mike.cn.controltab.ui.activity.WifiActivity
+import com.mike.cn.controltab.ui.dialog.PasswordInputDialog
 import com.tencent.mmkv.MMKV
 
 
@@ -38,13 +44,12 @@ class SettingFragment : Fragment(), View.OnClickListener {
     var but1: View? = null
     var but2: View? = null
     var but3: View? = null
-    var but3_1: View? = null
     var but4: View? = null
+    var but5: View? = null
 
     var vPass: View? = null
     var pass: EditText? = null
     var butCom: Button? = null
-    var sEdit: Switch? = null
     var ver: TextView? = null
 
 
@@ -63,31 +68,21 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but1 = con.findViewById(R.id.but1)
         but2 = con.findViewById(R.id.but2)
         but3 = con.findViewById(R.id.but3)
-        but3_1 = con.findViewById(R.id.but3_1)
         but4 = con.findViewById(R.id.but4)
+        but5 = con.findViewById(R.id.but5)
 
         vPass = con.findViewById(R.id.v_pass)
         pass = con.findViewById(R.id.edit_pass)
         butCom = con.findViewById(R.id.but_com)
-        sEdit = con.findViewById(R.id.s_edit)
         ver = con.findViewById(R.id.ver)
 
         but1?.setOnClickListener(this)
         but2?.setOnClickListener(this)
         but3?.setOnClickListener(this)
-        but3_1?.setOnClickListener(this)
         but4?.setOnClickListener(this)
+        but5?.setOnClickListener(this)
         butCom?.setOnClickListener(this)
-
-        val isEdit = MMKV.defaultMMKV().getBoolean(IS_EDIT, false)
-        sEdit?.isChecked = isEdit
-
-        sEdit?.setOnCheckedChangeListener { v, check ->
-            MMKV.defaultMMKV().putBoolean(IS_EDIT, check)
-        }
-
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
-
         ver?.text = "V${BuildConfig.VERSION_NAME}"
     }
 
@@ -113,18 +108,8 @@ class SettingFragment : Fragment(), View.OnClickListener {
             }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (vPass != null) {
-            vPass?.visibility = View.VISIBLE
-            pass?.setText("")
-        }
-    }
-
 
     override fun onClick(v: View?) {
-        if (vPass?.visibility == View.VISIBLE && v?.id != R.id.but_com)
-            return
         animate(v!!)
         when (v.id) {
             R.id.but1 -> {
@@ -137,47 +122,9 @@ class SettingFragment : Fragment(), View.OnClickListener {
 
             }
             R.id.but3 -> {
-                val intent = Intent(context, PortSetActivity::class.java)
-                context?.startActivity(intent)
+                PasswordInputDialog(requireContext(), 0)
             }
-            R.id.but3_1 -> {
-                PictureSelector.create(this)
-                    .openSystemGallery(SelectMimeType.ofVideo())
-                    .setSelectionMode(SelectModeConfig.SINGLE)
-                    .forSystemResult(object : OnResultCallbackListener<LocalMedia> {
-                        override fun onResult(result: ArrayList<LocalMedia>) {
-                            try {
-                                val paths = result[0]
-                                val realPath = paths.realPath
-                                // 获取文件名中最后一个点（.）的位置
-                                val lastIndex: Int = realPath.lastIndexOf(".")
-                                var fileExtension = ""
-                                if (lastIndex != -1) {
-                                    // 从最后一个点的位置开始截取字符串，得到后缀名
-                                    fileExtension = realPath.substring(lastIndex + 1)
-                                }
 
-                                if (fileExtension.contains("mp4") || fileExtension.contains("MP4") || fileExtension.contains(
-                                        "avi"
-                                    ) || fileExtension.contains("AVI") ||
-                                    fileExtension.contains("mkv") || fileExtension.contains("MKV") || fileExtension.contains(
-                                        "wmv"
-                                    ) || fileExtension.contains("WMV")
-                                ) {
-                                    pathData.putString(ConnectConfig.VIDEO_PATH, realPath)
-                                    Toast.makeText(context, "设置完成", Toast.LENGTH_SHORT).show()
-                                } else {
-                                    Toast.makeText(context, "请选择正确的视频格式", Toast.LENGTH_LONG).show()
-                                }
-
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-
-                        override fun onCancel() {}
-                    })
-            }
             R.id.but4 -> {
                 ToastUtils.showToast(context, "已经是最新版本了！")
                 //UpdateInfo信息可以通过版本更新接口获取
@@ -206,6 +153,11 @@ class SettingFragment : Fragment(), View.OnClickListener {
                 } else {
                     Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT).show()
                 }
+            }
+            R.id.but5 -> {
+                val defaultInfo = MMKV.defaultMMKV()
+                val config: String = FileHelper().getTxtContent(requireActivity(), "config.txt")
+                defaultInfo.encode("config", config)
             }
 
         }
