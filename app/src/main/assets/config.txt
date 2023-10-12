@@ -170,14 +170,14 @@
   {
     "id": "26",
     "type": "2",
-    "name": "星际",
+    "name": "更多模式",
     "code": "FE 53 CE 00",
     "image": ""
   },
   {
     "id": "26",
-    "type": "2",
-    "name": "梦幻",
+    "type": "",
+    "name": "",
     "code": "FE 54 CE 00",
     "image": ""
   },
@@ -327,6 +327,131 @@
     "name": "处理器输出",
     "code": "",
     "image": ""
-  }
+  },{
+        "id": "j1",
+        "type": "more",
+        "name": "春节",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j2",
+        "type": "more",
+        "name": "元宵",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j3",
+        "type": "more",
+        "name": "三八",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j4",
+        "type": "more",
+        "name": "清明",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j5",
+        "type": "more",
+        "name": "五一",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j6",
+        "type": "more",
+        "name": "母亲",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j7",
+        "type": "more",
+        "name": "父亲",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j8",
+        "type": "more",
+        "name": "端午",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j9",
+        "type": "more",
+        "name": "八一",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j10",
+        "type": "more",
+        "name": "情人",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j11",
+        "type": "more",
+        "name": "中秋",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j12",
+        "type": "more",
+        "name": "国庆",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j13",
+        "type": "more",
+        "name": "重阳",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j14",
+        "type": "more",
+        "name": "圣诞",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j15",
+        "type": "more",
+        "name": "元旦",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j16",
+        "type": "more",
+        "name": "结婚",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j17",
+        "type": "more",
+        "name": "霸屏",
+        "code": "",
+        "image": ""
+      },
+      {
+        "id": "j18",
+        "type": "more",
+        "name": "活动",
+        "code": "",
+        "image": ""
+      }
 
 ]

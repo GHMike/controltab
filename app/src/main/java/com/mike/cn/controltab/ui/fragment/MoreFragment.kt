@@ -1,5 +1,6 @@
 package com.mike.cn.controltab.ui.fragment
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +17,7 @@ import com.mike.cn.controltab.app.ConnectConfig.MORE_ID
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
 import com.mike.cn.controltab.tools.UdpUtil
-import com.mike.cn.controltab.ui.activity.MainActivity
+import com.mike.cn.controltab.ui.activity.MoreActivity
 import com.mike.cn.controltab.ui.adapters.MenuAdapter
 import com.mike.cn.controltab.ui.dialog.CustomDialog
 import com.tencent.mmkv.MMKV
@@ -25,11 +26,12 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * 场景控制
+ * 更多
  */
-class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
+class MoreFragment : Fragment(), CustomDialog.OnButtonClickListener {
 
 
+    var mediaPlayer: MediaPlayer? = null
     private var param1: String? = null
     private var param2: String? = null
 
@@ -56,21 +58,22 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
         return v
     }
 
+
     private fun initW(v: View) {
         rvData = v.findViewById(R.id.rv_data)
 
         val glm = GridLayoutManager(context, 6)
 
         //count/size=item数量
-        glm.spanSizeLookup = object : SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position == 18) {
-                    6 //size
-                } else {
-                    1
-                }
-            }
-        }
+//        glm.spanSizeLookup = object : SpanSizeLookup() {
+//            override fun getSpanSize(position: Int): Int {
+//                return if (position == 18) {
+//                    6 //size
+//                } else {
+//                    1
+//                }
+//            }
+//        }
 
         rvData?.layoutManager = glm
         myAdapter = MenuAdapter()
@@ -83,43 +86,25 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
             true
         }
         myAdapter?.setOnItemClickListener() { _, view, position ->
-            getMainActivity()?.playRaw()
-            // 缩放动画
-            view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
-                view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
-            }).start()
             if (myAdapter?.getItem(position)?.id == MORE_ID) {
-//                val intent = Intent(context, MoreActivity::class.java)
-//                startActivity(intent)
-                getMainActivity()?.goFragment(MoreFragment.newInstance("", ""), true)
+                val intent = Intent(context, MoreActivity::class.java)
+                startActivity(intent)
             } else {
                 UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
-
+                playRaw()
+                // 缩放动画
+                view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).withEndAction(Runnable {
+                    view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start()
+                }).start()
             }
         }
+        mediaPlayer = MediaPlayer.create(context, R.raw.tt)
 
-    }
 
-    /**
-     * 返回主页对象
-     *
-     * @return
-     */
-    fun getMainActivity(): MainActivity? {
-        return if (activity is MainActivity) {
-            activity as MainActivity?
-        } else {
-            null
-        }
     }
 
     private fun initData() {
-        val mainList = ConfigHelper().getConfigMenuList("2")
-        for (i in mainList) {
-            if (i.id == MORE_ID) {
-                i.itemType = 1
-            }
-        }
+        val mainList = ConfigHelper().getConfigMenuList("more")
         myAdapter?.setList(mainList)
     }
 
@@ -135,7 +120,7 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Tab2Fragment().apply {
+            MoreFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -156,8 +141,22 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
     override fun onDestroy() {
         super.onDestroy()
         // 释放MediaPlayer资源
+        if (mediaPlayer != null) {
+            mediaPlayer!!.release()
+            mediaPlayer = null
+        }
         if (dialog != null && dialog!!.isShowing) {
             dialog!!.dismiss()
+        }
+    }
+
+    /**
+     * 播放音效
+     */
+    fun playRaw() {
+        if (mediaPlayer != null) {
+            mediaPlayer!!.seekTo(0)
+            mediaPlayer!!.start()
         }
     }
 

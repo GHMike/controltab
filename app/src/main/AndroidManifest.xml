@@ -64,6 +64,11 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".ui.activity.MoreActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ui.activity.IndexActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"

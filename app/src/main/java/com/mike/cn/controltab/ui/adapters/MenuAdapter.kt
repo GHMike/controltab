@@ -14,6 +14,7 @@ class MenuAdapter() : BaseMultiItemQuickAdapter<MenuInfoModel, BaseViewHolder>()
 
     init {
         addItemType(0, R.layout.item_menu)
+        addItemType(1, R.layout.item_menu2)
     }
 
     override fun convert(holder: BaseViewHolder, item: MenuInfoModel) {
@@ -21,7 +22,6 @@ class MenuAdapter() : BaseMultiItemQuickAdapter<MenuInfoModel, BaseViewHolder>()
         holder.setText(R.id.tv_Name, item.name ?: "")
         Glide.with(context).load(item.image).error(R.mipmap.ic_launcher_round)
             .into(holder.getView(R.id.iv_Image))
-
 
 
     }

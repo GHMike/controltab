@@ -5,7 +5,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity
 /**
  * 菜单 model
  */
-class MenuInfoModel(override val itemType: Int) : MultiItemEntity {
+class MenuInfoModel(override var itemType: Int) : MultiItemEntity {
 
     var id: String? = ""
     var type: String? = ""

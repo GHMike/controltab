@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.mike.cn.controltab.R
+import com.mike.cn.controltab.app.ConnectConfig.TEMPERATURE_TAG
 import com.mike.cn.controltab.tools.UdpUtil
+import com.tencent.mmkv.MMKV
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -22,6 +24,10 @@ class Tab4Fragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var tv_wd: TextView? = null
+
+
+    private var mmvk: MMKV? = MMKV.defaultMMKV()
+
     private var viewArrayId = arrayOf(
         R.id.but_p,
         R.id.but_on,
@@ -73,6 +79,8 @@ class Tab4Fragment : Fragment() {
                 }).start()
             }
         }
+
+        tv_wd?.text = mmvk?.getString(TEMPERATURE_TAG, "22")
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
 
     }
@@ -90,6 +98,7 @@ class Tab4Fragment : Fragment() {
             if (wd > 16)
                 wd--
         }
+        mmvk?.putString(TEMPERATURE_TAG, wd.toString())
         tv_wd?.text = wd.toString()
 
     }

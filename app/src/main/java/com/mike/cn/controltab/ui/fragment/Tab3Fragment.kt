@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.tools.UdpUtil
+import com.tencent.mmkv.MMKV
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -67,6 +68,7 @@ class Tab3Fragment : Fragment() {
                 }).start()
             }
         }
+
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
 
     }

@@ -81,9 +81,9 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         myAdapter?.setOnItemLongClickListener { _, _, position ->
             val item = myAdapter?.getItem(position)
             if (isEdit) {
-                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
+//                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
                     showCustomDialog(myAdapter!!.getItem(position))
-                }
+//                }
             }
             true
         }

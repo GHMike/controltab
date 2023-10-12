@@ -61,18 +61,17 @@ class MainActivity : BaseActivity() {
 
             when (i) {
                 R.id.rb1 -> {
-
-                    displayFragment(Tab1Fragment.newInstance("", ""), false)
+                    displayFragment(Tab1Fragment.newInstance("", ""), true)
                 }
                 R.id.rb2 -> {
-                    displayFragment(Tab2Fragment.newInstance("", ""), false)
+                    displayFragment(Tab2Fragment.newInstance("", ""), true)
                 }
                 R.id.rb3 ->
-                    displayFragment(Tab3Fragment.newInstance("", ""), false)
+                    displayFragment(Tab3Fragment.newInstance("", ""), true)
                 R.id.rb4 ->
-                    displayFragment(Tab4Fragment.newInstance("", ""), false)
+                    displayFragment(Tab4Fragment.newInstance("", ""), true)
                 R.id.rb5 ->
-                    displayFragment(SettingFragment.newInstance("", ""), false)
+                    displayFragment(SettingFragment.newInstance("", ""), true)
             }
             playRaw()
         }
@@ -97,42 +96,44 @@ class MainActivity : BaseActivity() {
      * @param isAddToStack 是否加入到fragment栈里,用于返回
      */
     fun displayFragment(fragment: Fragment?, isAddToStack: Boolean) {
+        var fragmentNew: Fragment?
         if (fragment == null) return
+        fragmentNew = fragment
         if (isAddToStack) {
             when (rgMenu?.checkedRadioButtonId) {
                 R.id.rb1 -> {
                     if (tab1?.size!! > 0) {
-                        tab1?.peek()
+                        fragmentNew = tab1?.peek()
                     } else {
-                        tab1?.push(fragment)
+                        tab1?.push(fragmentNew)
                     }
                 }
                 R.id.rb2 -> {
                     if (tab2?.size!! > 0) {
-                        tab2?.peek()
+                        fragmentNew = tab2?.peek()
                     } else {
-                        tab2?.push(fragment)
+                        tab2?.push(fragmentNew)
                     }
                 }
                 R.id.rb3 -> {
                     if (tab3?.size!! > 0) {
-                        tab3?.peek()
+                        fragmentNew = tab3?.peek()
                     } else {
-                        tab3?.push(fragment)
+                        tab3?.push(fragmentNew)
                     }
                 }
                 R.id.rb4 -> {
                     if (tab4?.size!! > 0) {
-                        tab4?.peek()
+                        fragmentNew = tab4?.peek()
                     } else {
-                        tab4?.push(fragment)
+                        tab4?.push(fragmentNew)
                     }
                 }
                 R.id.rb5 -> {
                     if (tab5?.size!! > 0) {
-                        tab5?.peek()
+                        fragmentNew = tab5?.peek()
                     } else {
-                        tab5?.push(fragment)
+                        tab5?.push(fragmentNew)
                     }
                 }
             }
@@ -141,14 +142,83 @@ class MainActivity : BaseActivity() {
         val ft = fm.beginTransaction()
         //第一次加载
         if (indexFragment == null) {
-            ft.add(R.id.fl_content, fragment, fragment.javaClass.simpleName)
-        } else if (indexFragment !== fragment && !fragment.isAdded) {
-            ft.hide(indexFragment!!).add(R.id.fl_content, fragment, fragment.javaClass.simpleName)
-        } else if (indexFragment !== fragment) {
-            ft.hide(indexFragment!!).show(fragment)
+            ft.add(R.id.fl_content, fragmentNew!!, fragmentNew.javaClass.simpleName)
+        } else if (indexFragment !== fragmentNew && !fragmentNew!!.isAdded) {
+            ft.hide(indexFragment!!)
+                .add(R.id.fl_content, fragmentNew, fragmentNew.javaClass.simpleName)
+        } else if (indexFragment !== fragmentNew) {
+            ft.hide(indexFragment!!).show(fragmentNew!!)
         }
-        indexFragment = fragment
+        indexFragment = fragmentNew
         ft.commitAllowingStateLoss()
+    }
+
+
+    /**
+     * 显示fragment
+     *
+     * @param fragment
+     * @param isAddToStack 是否加入到fragment栈里,用于返回
+     */
+    fun goFragment(fragment: Fragment?, isAddToStack: Boolean) {
+        val fragmentNew: Fragment?
+        if (fragment == null) return
+        fragmentNew = fragment
+        if (isAddToStack) {
+            when (rgMenu?.checkedRadioButtonId) {
+                R.id.rb1 -> {
+                    tab1?.push(fragmentNew)
+                }
+                R.id.rb2 -> {
+                    tab2?.push(fragmentNew)
+                }
+                R.id.rb3 -> {
+                    tab3?.push(fragmentNew)
+                }
+                R.id.rb4 -> {
+                    tab4?.push(fragmentNew)
+                }
+                R.id.rb5 -> {
+                    tab5?.push(fragmentNew)
+                }
+            }
+        }
+        val fm = supportFragmentManager
+        val ft = fm.beginTransaction()
+        ft.commitAllowingStateLoss()
+
+        if (fragment != null) {
+//            if (fragment.isAdded) fragment.refreshData()
+            displayFragment(fragment, isAddToStack)
+        }
+    }
+
+    //回退
+    override fun onBackPressed() {
+        when (rgMenu?.checkedRadioButtonId) {
+
+            R.id.rb1 -> {
+                super.onBackPressed()
+            }
+            R.id.rb2 -> {
+                if (tab2?.size!! <= 1) {
+                    super.onBackPressed()
+                } else {
+                    tab2?.pop();
+                    val fragment = tab2?.peek()
+                    displayFragment(fragment, false);
+                }
+            }
+            R.id.rb3 -> {
+                super.onBackPressed()
+            }
+            R.id.rb4 -> {
+                super.onBackPressed()
+            }
+            R.id.rb5 -> {
+                super.onBackPressed()
+            }
+        }
     }
 
     override fun onPause() {
