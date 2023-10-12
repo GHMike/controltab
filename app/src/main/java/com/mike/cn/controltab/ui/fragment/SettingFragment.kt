@@ -84,6 +84,7 @@ class SettingFragment : Fragment(), View.OnClickListener {
         butCom?.setOnClickListener(this)
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
         ver?.text = "V${BuildConfig.VERSION_NAME}"
+        but5?.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
     }
 
 

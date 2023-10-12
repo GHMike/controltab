@@ -29,6 +29,10 @@ class IndexActivity : BaseActivity() {
     override fun setContentLayout() {
         hideStatusBar()
         setContentView(R.layout.activity_index)
+//        val intent = Intent(Intent.ACTION_MAIN)
+//        intent.addCategory(Intent.CATEGORY_HOME)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//        startActivity(intent)
     }
 
     override fun initView() {

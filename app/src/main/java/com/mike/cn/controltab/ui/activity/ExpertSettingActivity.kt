@@ -32,6 +32,7 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
     var but3: View? = null
     var but3_1: View? = null
     var but4: View? = null
+    var but5: View? = null
     var sEdit: Switch? = null
     var ivBack: View? = null
 
@@ -47,11 +48,13 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
         but3 = findViewById(R.id.but3)
         but3_1 = findViewById(R.id.but3_1)
         but4 = findViewById(R.id.but4)
+        but5 = findViewById(R.id.but5)
         sEdit = findViewById(R.id.s_edit)
         ivBack?.setOnClickListener(this)
         but3?.setOnClickListener(this)
         but3_1?.setOnClickListener(this)
         but4?.setOnClickListener(this)
+        but5?.setOnClickListener(this)
 
         val isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
         sEdit?.isChecked = isEdit
@@ -71,6 +74,10 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.iv_back -> {
                 onBackPressed()
+            }
+            R.id.but5 -> {
+                //退出 app
+                finishAffinity()
             }
             R.id.but3 -> {
                 val intent = Intent(context, PortSetActivity::class.java)
