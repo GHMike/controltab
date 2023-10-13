@@ -1,7 +1,13 @@
 package com.mike.cn.controltab.ui.activity
 
+import android.content.ContentResolver
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
@@ -28,11 +34,22 @@ class ScheduleControlActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun obtainData() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(context)) {
+                val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                intent.data = Uri.parse("package:" + context.packageName)
+                startActivity(intent)
+            }
+        }
+
+        seekBar?.progress = getCurrentBrightness()
+        percent?.text = seekBar?.progress.toString()
     }
 
     override fun initEvent() {
         seekBar!!.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                setBrightness(progress)
                 // 进度变化时的操作
                 percent?.text = progress.toString()
 //                EE B1 11 00 06 00 09 13 00 00 00 00 FF FC FF FF--
@@ -51,6 +68,20 @@ class ScheduleControlActivity : BaseActivity(), View.OnClickListener {
                 // 停止拖动时的操作
             }
         })
+    }
+
+    private fun getCurrentBrightness(): Int {
+        val contentResolver: ContentResolver = applicationContext.contentResolver
+        return Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS)
+    }
+
+    private fun setBrightness(brightness: Int) {
+        val contentResolver: ContentResolver = applicationContext.contentResolver
+        Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, brightness)
+        // 刷新窗口 缺少过度动画会闪屏
+//        val layoutParams = window.attributes
+//        layoutParams.screenBrightness = brightness.toFloat() / 100
+//        window.attributes = layoutParams
     }
 
     override fun onClick(v: View?) {

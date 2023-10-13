@@ -45,7 +45,7 @@ public class CustomDialog extends Dialog {
 
 
     public CustomDialog(Context context, MenuInfoModel data, OnButtonClickListener listener) {
-        super(context,R.style.CustomDialog);
+        super(context, R.style.CustomDialog);
         this.buttonClickListener = listener;
         this.mContext = context;
         this.data = data;
@@ -130,6 +130,7 @@ public class CustomDialog extends Dialog {
     private void initData() {
         tvName.setText(data.getName());
         tv_code.setText(data.getCode());
+        iv_Image.setTag(data.getImage());
 
         Glide.with(mContext).load(data.getImage()).error(R.mipmap.ic_launcher_round).into(iv_Image);
     }

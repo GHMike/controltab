@@ -158,7 +158,9 @@ class SettingFragment : Fragment(), View.OnClickListener {
             R.id.but5 -> {
                 val defaultInfo = MMKV.defaultMMKV()
                 val config: String = FileHelper().getTxtContent(requireActivity(), "config.txt")
+                val config2: String = FileHelper().getTxtContent(requireActivity(), "config2.txt")
                 defaultInfo.encode("config", config)
+                defaultInfo.encode("config2", config2)
             }
 
         }

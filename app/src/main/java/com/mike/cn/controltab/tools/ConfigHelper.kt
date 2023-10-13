@@ -48,6 +48,32 @@ open class ConfigHelper {
 
     }
 
+    /**
+     * 获取配置菜单列表2
+     */
+    open fun getConfigFixedMenuList(type: String): ArrayList<MenuInfoModel> {
+        try {
+            val gson = Gson()
+            val string = defaultInfo.decodeString("config2", "")
+            val mList: ArrayList<MenuInfoModel> = gson.fromJson(
+                string, object : TypeToken<ArrayList<MenuInfoModel?>?>() {}.type
+            )
+            if (mList.isEmpty())
+                return arrayListOf()
+
+            val returnList = ArrayList<MenuInfoModel>()
+            for (s in mList) {
+                if (s.type == type)
+                    returnList.add(s)
+            }
+            return if (type.isEmpty()) mList else returnList
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ArrayList()
+
+    }
+
 
     /**
      * 更新配置菜单列表中的信息
@@ -67,6 +93,26 @@ open class ConfigHelper {
         }
         val jsonArray = gson.toJson(list)
         defaultInfo.encode("config", jsonArray.toString())
+    }
+
+    /**
+     * 更新配置固定菜单列表中的信息
+     */
+    fun upDataConfigFixedMenuList(upInfo: MenuInfoModel) {
+        val gson = Gson()
+        val list: ArrayList<MenuInfoModel> = gson.fromJson(
+            defaultInfo.decodeString("config2", ""),
+            object : TypeToken<ArrayList<MenuInfoModel?>?>() {}.type
+        )
+        for (up in list) {
+            if (up.id == upInfo.id) {
+                up.name = upInfo.name
+                up.image = upInfo.image
+                up.code = upInfo.code
+            }
+        }
+        val jsonArray = gson.toJson(list)
+        defaultInfo.encode("config2", jsonArray.toString())
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")

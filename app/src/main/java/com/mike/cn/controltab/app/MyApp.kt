@@ -57,7 +57,9 @@ class MyApp : Application() {
             Log.e("init", "安装 app 第一次初始化配置信息")
             defaultInfo.putBoolean("init", true)
             val config: String = FileHelper().getTxtContent(this, "config.txt")
+            val config2: String = FileHelper().getTxtContent(this, "config2.txt")
             defaultInfo.encode("config", config)
+            defaultInfo.encode("config2", config2)
         }
         //bug ly
         CrashReport.initCrashReport(this, "155e1b1332", false);

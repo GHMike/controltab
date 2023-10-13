@@ -28,19 +28,22 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
+            android:tag="1"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="切歌"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -61,18 +64,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="2"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img2"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐重置"
@@ -97,16 +103,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
+            android:tag="3"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img3"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 原唱/伴唱"
@@ -137,18 +146,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="4"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img4"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐播放"
@@ -171,18 +183,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="5"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img5"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐暂停"
@@ -205,18 +220,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="6"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img6"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐音量"
@@ -239,18 +257,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="7"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img7"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐音量"
@@ -273,18 +294,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="8"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img8"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐静音"
@@ -307,18 +331,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="9"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img9"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="音乐非静音"
@@ -341,18 +368,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="10"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img10"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="关麦克风"
@@ -375,18 +405,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:tag="11"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="vertical">
 
 
             <ImageView
+                android:id="@+id/iv_img11"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="开麦克风"
