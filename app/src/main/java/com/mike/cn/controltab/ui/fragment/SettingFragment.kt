@@ -45,7 +45,6 @@ class SettingFragment : Fragment(), View.OnClickListener {
     var but2: View? = null
     var but3: View? = null
     var but4: View? = null
-    var but5: View? = null
 
     var vPass: View? = null
     var pass: EditText? = null
@@ -69,7 +68,6 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but2 = con.findViewById(R.id.but2)
         but3 = con.findViewById(R.id.but3)
         but4 = con.findViewById(R.id.but4)
-        but5 = con.findViewById(R.id.but5)
 
         vPass = con.findViewById(R.id.v_pass)
         pass = con.findViewById(R.id.edit_pass)
@@ -80,11 +78,9 @@ class SettingFragment : Fragment(), View.OnClickListener {
         but2?.setOnClickListener(this)
         but3?.setOnClickListener(this)
         but4?.setOnClickListener(this)
-        but5?.setOnClickListener(this)
         butCom?.setOnClickListener(this)
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
         ver?.text = "V${BuildConfig.VERSION_NAME}"
-        but5?.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
     }
 
 
@@ -154,13 +150,6 @@ class SettingFragment : Fragment(), View.OnClickListener {
                 } else {
                     Toast.makeText(context, "密码错误", Toast.LENGTH_SHORT).show()
                 }
-            }
-            R.id.but5 -> {
-                val defaultInfo = MMKV.defaultMMKV()
-                val config: String = FileHelper().getTxtContent(requireActivity(), "config.txt")
-                val config2: String = FileHelper().getTxtContent(requireActivity(), "config2.txt")
-                defaultInfo.encode("config", config)
-                defaultInfo.encode("config2", config2)
             }
 
         }

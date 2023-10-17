@@ -6,11 +6,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.luck.picture.lib.utils.ToastUtils
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig.PASS_TAG
+import com.mike.cn.controltab.tools.HideNavBarUtil
 import com.mike.cn.controltab.ui.activity.ExpertSettingActivity
 import com.tencent.mmkv.MMKV
 
@@ -64,6 +64,7 @@ class PasswordInputDialog(context: Context, type: Int) {
             }
         }
 
+        HideNavBarUtil.hideNavigation(alertDialog)
         cancel.setOnClickListener {
             alertDialog.dismiss()
         }

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.model.MenuInfoModel
@@ -36,6 +37,8 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     private var myAdapter: MenuAdapter? = null
     private var but1: TextView? = null
     private var but2: TextView? = null
+    private var tv_code1: TextView? = null
+    private var tv_code2: TextView? = null
     private var but3: View? = null
     private var but4: View? = null
     private var dialog: CustomDialog? = null
@@ -69,6 +72,8 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         rvData = v.findViewById(R.id.rv_data)
         but1 = v.findViewById(R.id.but1)
         but2 = v.findViewById(R.id.but2)
+        tv_code1 = v.findViewById(R.id.tv_code1)
+        tv_code2 = v.findViewById(R.id.tv_code2)
         but3 = v.findViewById(R.id.but3)
         but4 = v.findViewById(R.id.but4)
         but1?.setOnClickListener(this)
@@ -82,7 +87,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             val item = myAdapter?.getItem(position)
             if (isEdit) {
 //                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
-                    showCustomDialog(myAdapter!!.getItem(position))
+                showCustomDialog(myAdapter!!.getItem(position))
 //                }
             }
             true
@@ -109,6 +114,20 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         }
         initData()
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
+
+
+        but1?.setOnLongClickListener {
+            if (isEdit) {
+                showCustomDialog(but1!!)
+            }
+            true
+        }
+        but2?.setOnLongClickListener {
+            if (isEdit) {
+                showCustomDialog(but2!!)
+            }
+            true
+        }
     }
 
 
@@ -123,9 +142,46 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
 
     private fun initData() {
         myAdapter?.setList(ConfigHelper().getConfigMenuList("1"))
+
+        //获取固定配置
+        val infoList = ConfigHelper().getConfigFixedMenuList("3")
+        for (j in infoList) {
+            if (j.id == "26") {
+                but1?.text = j.name
+                tv_code1?.tag = j.code
+                tv_code1?.text = j.image
+            }
+            if (j.id == "27") {
+                but2?.text = j.name
+                tv_code2?.tag = j.code
+                tv_code2?.text = j.image
+            }
+        }
     }
 
+    //列表修改弹窗
     private fun showCustomDialog(data: MenuInfoModel) {
+        if (dialog == null) {
+            dialog = CustomDialog(activity, data, this)
+        } else {
+            dialog?.setData(data)
+        }
+        dialog?.show()
+    }
+
+    //显示固定菜单修改窗
+    private fun showCustomDialog(view: TextView) {
+        val data = MenuInfoModel(0)
+        data.id = view.tag.toString()
+        data.type = "3"
+        data.name = view.text.toString()
+        if (view.tag.toString() == "26") {
+            data.code = tv_code1?.tag.toString()
+            data.image = tv_code1?.text.toString()
+        } else {
+            data.code = tv_code2?.tag.toString()
+            data.image = tv_code2?.text.toString()
+        }
         if (dialog == null) {
             dialog = CustomDialog(activity, data, this)
         } else {
@@ -150,14 +206,18 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         when (v?.id) {
             R.id.but1 -> {
                 try {
-                    UdpUtil.getInstance().sendUdpCommand("FE AB CE 00")
+                    if (tv_code1?.tag != null) {
+                        UdpUtil.getInstance().sendUdpCommand(tv_code1?.tag.toString())
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
             R.id.but2 -> {
                 try {
-                    UdpUtil.getInstance().sendUdpCommand("FE AA CE 00")
+                    if (tv_code2?.tag != null) {
+                        UdpUtil.getInstance().sendUdpCommand(tv_code2?.tag.toString())
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -246,7 +306,11 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     }
 
     override fun onNegativeButtonClick(infoModel: MenuInfoModel) {
-        ConfigHelper().upDataConfigMenuList(infoModel)
+        if (infoModel.type == "3") {
+            ConfigHelper().upDataConfigFixedMenuList(infoModel)
+        } else {
+            ConfigHelper().upDataConfigMenuList(infoModel)
+        }
         Toast.makeText(context, "保存成功", Toast.LENGTH_LONG).show()
         resPopupData()
         initData()

@@ -149,5 +149,17 @@
     "name": "自动风速",
     "code": "",
     "image": ""
-  }
+  },{
+      "id": "26",
+      "type": "3",
+      "name": " 全开",
+      "code": "FE AB CE 00",
+      "image": ""
+  },{
+      "id": "27",
+      "type": "3",
+      "name": "全关",
+      "code": "FE AA CE 00",
+      "image": ""
+    }
 ]

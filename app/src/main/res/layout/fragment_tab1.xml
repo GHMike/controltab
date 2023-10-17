@@ -26,6 +26,7 @@
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:padding="10dp"
+            android:tag="26"
             android:text="全开"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -34,6 +35,18 @@
             app:gradient_endColor="@color/purple_200"
             app:gradient_startColor="@color/white"
             tools:ignore="MissingClass" />
+
+        <TextView
+            android:id="@+id/tv_code1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_code2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <com.flyjingfish.gradienttextviewlib.GradientTextView
             android:id="@+id/but2"
@@ -44,6 +57,7 @@
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
             android:padding="10dp"
+            android:tag="27"
             android:text="全关"
             android:textColor="@color/white"
             android:textSize="16sp"

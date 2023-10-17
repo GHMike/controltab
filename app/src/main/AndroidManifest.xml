@@ -50,6 +50,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+        <service
+            android:name=".service.MyJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity
             android:name=".ui.activity.ActivateActivity"

@@ -139,6 +139,31 @@
                 tools:ignore="MissingClass" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/but_sys"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_w_border"
+            android:visibility="visible">
+
+            <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_launcher_round"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="重置配置"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:gradient_angle="1"
+                app:gradient_endColor="@color/white"
+                app:gradient_startColor="@color/teal_200"
+                tools:ignore="MissingClass" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

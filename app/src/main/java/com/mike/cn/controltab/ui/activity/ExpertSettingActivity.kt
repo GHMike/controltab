@@ -12,10 +12,12 @@ import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
+import com.mike.cn.controltab.BuildConfig
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.app.ConnectConfig.IP_ADDS
 import com.mike.cn.controltab.app.ConnectConfig.PORT_NUM
+import com.mike.cn.controltab.tools.FileHelper
 import com.mike.cn.controltab.tools.UDPClient
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.mike.cn.controltab.ui.dialog.PasswordInputDialog
@@ -35,6 +37,7 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
     var but5: View? = null
     var sEdit: Switch? = null
     var ivBack: View? = null
+    var but_sys: View? = null
 
     val pathData = MMKV.defaultMMKV()
 
@@ -50,11 +53,14 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
         but4 = findViewById(R.id.but4)
         but5 = findViewById(R.id.but5)
         sEdit = findViewById(R.id.s_edit)
+        but_sys = findViewById(R.id.but_sys)
         ivBack?.setOnClickListener(this)
         but3?.setOnClickListener(this)
         but3_1?.setOnClickListener(this)
         but4?.setOnClickListener(this)
         but5?.setOnClickListener(this)
+        but_sys?.setOnClickListener(this)
+        but_sys?.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
 
         val isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
         sEdit?.isChecked = isEdit
@@ -85,6 +91,14 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.but4 -> {
                 PasswordInputDialog(context, 1)
+            }
+            //重置配置文件
+            R.id.but_sys -> {
+                val defaultInfo = MMKV.defaultMMKV()
+                val config: String = FileHelper().getTxtContent(context, "config.txt")
+                val config2: String = FileHelper().getTxtContent(context, "config2.txt")
+                defaultInfo.encode("config", config)
+                defaultInfo.encode("config2", config2)
             }
             R.id.but3_1 -> {
                 PictureSelector.create(this)

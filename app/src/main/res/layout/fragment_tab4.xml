@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:tag="12"
             android:text="自动匹配"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -31,6 +32,12 @@
             app:gradient_endColor="@color/white"
             app:gradient_startColor="@color/purple_500"
             tools:ignore="MissingClass" />
+
+        <TextView
+            android:id="@+id/v_p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -55,16 +62,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="13">
 
 
             <ImageView
+                android:id="@+id/iv_img"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="空调电源开"
@@ -84,16 +94,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="14">
 
 
             <ImageView
+                android:id="@+id/iv_img1"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="空调电源关"
@@ -106,13 +119,27 @@
                 tools:ignore="MissingClass" />
         </LinearLayout>
 
-        <TextView
+        <com.flyjingfish.gradienttextviewlib.GradientTextView
+            android:id="@+id/but_auto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
+            android:tag="25"
+            android:text="自动匹配"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:gradient_angle="10"
+            app:gradient_endColor="@color/teal_200"
+            app:gradient_startColor="@color/teal_200"
+            tools:ignore="MissingClass" />
+
+        <TextView
+            android:id="@+id/v_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/but_jia"
@@ -121,16 +148,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="15">
 
 
             <ImageView
+                android:id="@+id/iv_img2"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="空调温度"
@@ -172,16 +202,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="16">
 
 
             <ImageView
+                android:id="@+id/iv_img3"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="空调温度"
@@ -239,16 +272,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="17">
 
 
             <ImageView
+                android:id="@+id/iv_img4"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="制热模式"
@@ -273,16 +309,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="18">
 
 
             <ImageView
+                android:id="@+id/iv_img5"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="制冷模式"
@@ -307,16 +346,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="19">
 
 
             <ImageView
+                android:id="@+id/iv_img6"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="除湿模式"
@@ -341,16 +383,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="20">
 
 
             <ImageView
+                android:id="@+id/iv_img7"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="低风模式"
@@ -375,16 +420,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="21">
 
 
             <ImageView
+                android:id="@+id/iv_img8"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="中风模式"
@@ -409,16 +457,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="22">
 
 
             <ImageView
+                android:id="@+id/iv_img9"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="强风模式"
@@ -443,16 +494,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="23">
 
 
             <ImageView
+                android:id="@+id/iv_img10"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="摆风开"
@@ -477,16 +531,19 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:tag="24">
 
 
             <ImageView
+                android:id="@+id/iv_img11"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round" />
 
 
             <com.flyjingfish.gradienttextviewlib.GradientTextView
+                android:id="@+id/tv_name11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="摆风关"
