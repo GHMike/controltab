@@ -92,6 +92,11 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".ui.activity.FindIpActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ui.activity.ExpertSettingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"

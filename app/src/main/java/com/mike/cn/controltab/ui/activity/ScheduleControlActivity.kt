@@ -56,7 +56,7 @@ class ScheduleControlActivity : BaseActivity(), View.OnClickListener {
 //                EE B1 11 00 06 00 09 13 00 00 00 64 FF FC FF FF 第39通道0-100背光光值对应255
                 val hexadecimalNumber = String.format("%02X", progress)
                 val allCode = "EE B1 11 00 06 00 09 13 00 00 00 $hexadecimalNumber FF FC FF FF"
-                Log.i("111111", allCode)
+                Log.i("111111", allCode+progress.toString())
                 UdpUtil.getInstance().sendUdpCommand(allCode)
             }
 

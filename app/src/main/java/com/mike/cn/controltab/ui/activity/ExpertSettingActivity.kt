@@ -15,14 +15,10 @@ import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.mike.cn.controltab.BuildConfig
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
-import com.mike.cn.controltab.app.ConnectConfig.IP_ADDS
-import com.mike.cn.controltab.app.ConnectConfig.PORT_NUM
 import com.mike.cn.controltab.tools.FileHelper
-import com.mike.cn.controltab.tools.UDPClient
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.mike.cn.controltab.ui.dialog.PasswordInputDialog
 import com.tencent.mmkv.MMKV
-import java.util.concurrent.Executors
 
 /**
  * 连接端口设置页面

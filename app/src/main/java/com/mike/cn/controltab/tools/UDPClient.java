@@ -126,7 +126,7 @@ public class UDPClient implements Runnable {
                 LiveEventBus.get(MES_TAG).post(rcvMsg);
                 Log.i("Rcv", rcvMsg);
             } catch (IOException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
             } catch (Exception e) {
                 udpLife = false;
                 e.printStackTrace();
