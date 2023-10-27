@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.Gson
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig.PORT_NUM
 import com.mike.cn.controltab.model.FindIpModel
@@ -32,6 +33,7 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
     var butSend: Button? = null
     val port = MMKV.defaultMMKV()
     var ivBack: View? = null
+    private val UDP_RCV_TAG = "udp_rcv_tag"
     private val udpRcvStrBuf = StringBuffer("")
 
     override fun setContentLayout() {
@@ -58,7 +60,11 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
 
     }
 
+
     override fun initEvent() {
+        LiveEventBus.get(UDP_RCV_TAG, String::class.java).observe(this) { it ->
+            tv_report?.text = it
+        }
     }
 
     override fun onClick(v: View?) {
@@ -100,7 +106,7 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
             Log.e("udp返回", it)
             udpRcvStrBuf.append(it.toString())
             udpRcvStrBuf.append("\n")
-            tv_report?.text = udpRcvStrBuf.toString()
+            LiveEventBus.get<String>(UDP_RCV_TAG).post(udpRcvStrBuf.toString())
         }
     }
 
