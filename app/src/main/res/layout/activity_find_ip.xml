@@ -142,22 +142,26 @@
             tools:layout_editor_absoluteY="343dp" />
     </LinearLayout>
 
-    <TextView
+    <EditText
         android:id="@+id/tv_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/but_send"
         android:layout_below="@+id/con_view2"
         android:layout_marginStart="5dp"
-
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:background="@color/ps_color_grey_3e"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:gravity="top"
         android:hint="信息返回面板"
-        android:textColorHint="@color/ps_color_light_grey"
         android:padding="5dp"
+        android:scrollbars="vertical"
         android:textColor="@color/white"
+        android:textColorHint="@color/ps_color_light_grey"
         android:textIsSelectable="true"
         android:textSize="13sp" />
 

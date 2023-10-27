@@ -1,7 +1,5 @@
 package com.mike.cn.controltab.ui.activity
 
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -18,6 +16,7 @@ import com.mike.cn.controltab.tools.UdpUtil
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.tencent.mmkv.MMKV
 
+
 /**
  * 连接地址查找页面
  */
@@ -25,7 +24,7 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
 
 
     var dev_id: TextView? = null
-    var tv_report: TextView? = null
+    var tv_report: EditText? = null
     var et_Id: EditText? = null
     var etName: EditText? = null
     var et_password: EditText? = null
@@ -52,6 +51,7 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
         butSend = findViewById(R.id.but_send)
         ivBack?.setOnClickListener(this)
         butSend?.setOnClickListener(this)
+
     }
 
     override fun obtainData() {
@@ -63,7 +63,8 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
 
     override fun initEvent() {
         LiveEventBus.get(UDP_RCV_TAG, String::class.java).observe(this) { it ->
-            tv_report?.text = it
+            tv_report?.setText(it) // 将光标移动到文本的最后
+            tv_report?.setSelection(tv_report?.text.toString().length)
         }
     }
 
