@@ -172,7 +172,7 @@
     "type": "2",
     "name": "更多模式",
     "code": "FE 53 CE 00",
-    "image": ""
+    "image": "main"
   },
   {
     "id": "26",

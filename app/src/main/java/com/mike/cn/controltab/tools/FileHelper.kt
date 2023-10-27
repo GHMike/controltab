@@ -1,6 +1,7 @@
 package com.mike.cn.controltab.tools
 
 import android.content.Context
+import com.mike.cn.controltab.R
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -34,5 +35,24 @@ open class FileHelper {
 
     }
 
+
+    /**
+     * 根据文件名字获取Mipmap目录下的资源 id
+     */
+    open fun getMipmapResId(context: Context, name: String): Int {
+        return if (name.isNotEmpty()) {
+            // 获取资源标识符
+            val resourceId = context.resources.getIdentifier(name, "mipmap", context.packageName)
+
+            // 检查资源是否存在
+            if (resourceId != 0) {
+                resourceId;
+            } else {
+                R.mipmap.ic_launcher_round;
+            }
+        } else {
+            R.mipmap.ic_launcher_round;
+        }
+    }
 
 }

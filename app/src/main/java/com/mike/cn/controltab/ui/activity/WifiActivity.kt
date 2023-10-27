@@ -67,6 +67,7 @@ class WifiActivity : BaseActivity() {
         setContentView(R.layout.activity_wifi)
         getPerMission()
         initWifi()
+        R.mipmap.main
     }
 
 
