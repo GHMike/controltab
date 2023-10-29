@@ -19,7 +19,7 @@ public class UdpUtil {
 
     private static UdpUtil instance;
     // UDP端口
-    private static int UDP_PORT = 12345;
+    private static int UDP_PORT = 0;
     // IP 地址
     private static String HOST_IP = "";
     // 最大数据包长度
@@ -50,6 +50,15 @@ public class UdpUtil {
     }
 
     public void sendUdpCommand(String command) {
+        UDP_PORT = MMKV.defaultMMKV().getInt(PORT_NUM, 9999);
+        HOST_IP = MMKV.defaultMMKV().getString(IP_ADDS, "192.168.0.1");
+        SendUdpTask sendUdpTask = new SendUdpTask(command);
+        executorService.submit(sendUdpTask);
+    }
+
+    public void sendUdpCommand(String command, String adds, int port) {
+        HOST_IP = adds;
+        UDP_PORT = port;
         SendUdpTask sendUdpTask = new SendUdpTask(command);
         executorService.submit(sendUdpTask);
     }
@@ -101,8 +110,7 @@ public class UdpUtil {
                     udpSocket = new DatagramSocket();
                     return;
                 }
-                UDP_PORT = MMKV.defaultMMKV().getInt(PORT_NUM, 9999);
-                HOST_IP = MMKV.defaultMMKV().getString(IP_ADDS, "192.168.0.1");
+
                 destinationAddress = InetAddress.getByName(HOST_IP); // 指定接收端IP地址
                 DatagramPacket packet = new DatagramPacket(sendData, sendData.length, destinationAddress, UDP_PORT);
                 udpSocket.send(packet);
@@ -121,14 +129,14 @@ public class UdpUtil {
                 }
                 byte[] buffer = new byte[MAX_UDP_DATAGRAM_LEN];
                 DatagramPacket packetRcv = new DatagramPacket(buffer, buffer.length);
-                InetAddress hostAddress = InetAddress.getByName(HOST_IP);
-                packetRcv.setAddress(hostAddress);
+//                InetAddress hostAddress = InetAddress.getByName(HOST_IP);
+//                packetRcv.setAddress(hostAddress);
 
                 while (!Thread.currentThread().isInterrupted()) {
                     udpSocket.receive(packetRcv);
                     String receivedData = new String(packetRcv.getData(), 0, packetRcv.getLength());
                     if (thisUdpReceiveListener != null) {
-                        thisUdpReceiveListener.onUdpReceived(receivedData);
+                        thisUdpReceiveListener.onUdpReceived(packetRcv.getSocketAddress() + " 回复：\n" + receivedData);
                     }
 
                 }

@@ -29,11 +29,26 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
     var etName: EditText? = null
     var et_password: EditText? = null
     var portNum: EditText? = null
+    var gb_port: EditText? = null
+    var gb_adds: EditText? = null
     var butSend: Button? = null
-    val port = MMKV.defaultMMKV()
+
+    var but2: Button? = null
+    var but3: Button? = null
+    var but4: Button? = null
+
+
     var ivBack: View? = null
     private val UDP_RCV_TAG = "udp_rcv_tag"
+    private val ID_TAG = "id_TAG"
+    private val WIFINAME_TAG = "wifiName_TAG"
+    private val PASSWNAME_TAG = "passwName_TAG"
+    private val PORTNAME_TAG = "portName_TAG"
+    private val GB_TAG = "gb_TAG"
+    private val GBPORT_TAG = "gbport_TAG"
     private val udpRcvStrBuf = StringBuffer("")
+
+    private val mmkv: MMKV = MMKV.defaultMMKV()
 
     override fun setContentLayout() {
         hideStatusBar()
@@ -47,16 +62,31 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
         etName = findViewById(R.id.et_Name)
         et_password = findViewById(R.id.et_password)
         portNum = findViewById(R.id.port_Num)
+        gb_port = findViewById(R.id.et_gbport)
+        gb_adds = findViewById(R.id.et_gb)
         ivBack = findViewById(R.id.iv_back)
         butSend = findViewById(R.id.but_send)
+
+        but2 = findViewById(R.id.but_2)
+        but3 = findViewById(R.id.but_3)
+        but4 = findViewById(R.id.but_4)
         ivBack?.setOnClickListener(this)
+        but2?.setOnClickListener(this)
+        but3?.setOnClickListener(this)
+        but4?.setOnClickListener(this)
         butSend?.setOnClickListener(this)
 
     }
 
     override fun obtainData() {
-        portNum?.setText(port.getInt(PORT_NUM, 9999).toString())
         ConfigHelper().getEnCode()?.let { et_Id?.setText(it) }
+        et_Id?.setText(mmkv.getString(ID_TAG, ConfigHelper().getEnCode()))
+        etName?.setText(mmkv.getString(WIFINAME_TAG, ""))
+        et_password?.setText(mmkv.getString(PASSWNAME_TAG, ""))
+        portNum?.setText(mmkv.getString(PORTNAME_TAG, "9999"))
+
+        gb_adds?.setText(mmkv.getString(GB_TAG, "192.168.0.255"))
+        gb_port?.setText(mmkv.getString(GBPORT_TAG, "9999"))
 
     }
 
@@ -83,7 +113,17 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
                     Toast.makeText(context, "请输入端口号", Toast.LENGTH_SHORT).show()
                     return
                 }
-                sendJson()
+                sendJson(0)
+            }
+            R.id.but_2 -> {
+                sendJson(1)
+            }
+
+            R.id.but_3 -> {
+                sendJson(2)
+            }
+            R.id.but_4 -> {
+                sendJson(3)
             }
             R.id.iv_back -> {
                 onBackPressed()
@@ -93,16 +133,55 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
 
 
     //发送json请求
-    private fun sendJson() {
-        val sendInfo = FindIpModel(0)
-        sendInfo.id = et_Id?.text.toString()
-        sendInfo.ssid = etName?.text.toString()
-        sendInfo.pass = et_password?.text.toString()
-        sendInfo.port = portNum?.text.toString()
-        sendInfo.req = "set"
+    private fun sendJson(type: Int) {
+        var sendInfo: FindIpModel? = null
+        when (type) {
+            0 -> {
+                sendInfo = FindIpModel(0)
+                sendInfo.req = "set"
+                sendInfo.id = et_Id?.text.toString()
+                sendInfo.ssid = etName?.text.toString()
+                sendInfo.pass = et_password?.text.toString()
+                sendInfo.port = portNum?.text.toString()
+
+                mmkv.putString(ID_TAG, sendInfo.id)
+                mmkv.putString(WIFINAME_TAG, sendInfo.ssid)
+                mmkv.putString(PASSWNAME_TAG, sendInfo.pass)
+                mmkv.putString(PORTNAME_TAG, sendInfo.port)
+            }
+            1 -> {
+                sendInfo = FindIpModel(0)
+                sendInfo.req = "consta"
+            }
+            2 -> {
+                sendInfo = FindIpModel(0)
+                sendInfo.req = "bcast"
+                sendInfo.id = et_Id?.text.toString()
+
+            }
+            3 -> {
+                sendInfo = FindIpModel(0)
+                sendInfo.req = "reset"
+                sendInfo.id = et_Id?.text.toString()
+            }
+        }
 
         val sendJson = Gson().toJson(sendInfo)
-        UdpUtil.getInstance().sendUdpCommand(sendJson)
+        when (type) {
+            0, 1 -> {
+                UdpUtil.getInstance().sendUdpCommand(sendJson)
+            }
+            2, 3 -> {
+                var portNum = 9999
+                if (gb_port?.text.toString().isNotEmpty())
+                    portNum = gb_port?.text.toString().toInt()
+                UdpUtil.getInstance().sendUdpCommand(sendJson, gb_adds?.text.toString(), portNum)
+
+                mmkv.putString(GB_TAG, gb_adds?.text.toString())
+                mmkv.putString(GBPORT_TAG, portNum.toString())
+            }
+        }
+
         UdpUtil.getInstance().startListening {
             Log.e("udp返回", it)
             udpRcvStrBuf.append(it.toString())

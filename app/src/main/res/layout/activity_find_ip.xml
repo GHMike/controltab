@@ -105,7 +105,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="密      码:"
+            android:text="发送密码:"
             android:textColor="@color/white"
             tools:layout_editor_absoluteX="157dp"
             tools:layout_editor_absoluteY="354dp" />
@@ -125,7 +125,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="端    口:"
+            android:text="发送端口:"
             android:textColor="@color/white"
             tools:layout_editor_absoluteX="157dp"
             tools:layout_editor_absoluteY="354dp" />
@@ -142,12 +142,62 @@
             tools:layout_editor_absoluteY="343dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/con_view3"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/con_view2"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_gb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="广播地址:"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="354dp" />
+
+        <EditText
+            android:id="@+id/et_gb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="195dp"
+            tools:layout_editor_absoluteY="343dp" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 广播端口:"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="354dp" />
+
+        <EditText
+            android:id="@+id/et_gbport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberSigned"
+            android:text="9999"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="195dp"
+            tools:layout_editor_absoluteY="343dp" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/tv_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/but_send"
-        android:layout_below="@+id/con_view2"
+        android:layout_above="@+id/bv"
+        android:layout_below="@+id/con_view3"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
@@ -165,15 +215,56 @@
         android:textIsSelectable="true"
         android:textSize="13sp" />
 
-    <Button
-        android:id="@+id/but_send"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/bv"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:text="发送"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="400dp" />
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/but_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toStartOf="@+id/but_2"
+            android:text="发送" />
+
+        <Button
+            android:id="@+id/but_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="wifi状态" />
+
+        <Button
+            android:id="@+id/but_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/but_2"
+            android:text="广播" />
+
+        <Button
+            android:id="@+id/but_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="复位" />
+    </RelativeLayout>
+
 </RelativeLayout>
