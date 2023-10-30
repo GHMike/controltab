@@ -1,11 +1,10 @@
 package com.mike.cn.controltab.tools
 
 import android.content.Context
+import android.content.res.AssetManager
+import android.util.Log
 import com.mike.cn.controltab.R
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
+import java.io.*
 
 
 open class FileHelper {
@@ -55,4 +54,33 @@ open class FileHelper {
         }
     }
 
+    open fun copyAssetToInternalStorage(context: Context, filename: String) {
+        val assetManager: AssetManager = context.assets
+        var `in`: InputStream? = null
+        var out: FileOutputStream? = null
+        try {
+            `in` = assetManager.open(filename)
+            val outFile = File(context.filesDir, filename)
+            out = FileOutputStream(outFile)
+            val buffer = ByteArray(1024)
+            var read: Int
+            while (`in`.read(buffer).also { read = it } != -1) {
+                out.write(buffer, 0, read)
+            }
+            Log.d("VideoPlayerActivity", "Copied $filename to internal storage")
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            try {
+                `in`?.close()
+                out?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    open fun getInternalStoragePath(context: Context, filename: String): String {
+        return File(context.filesDir, filename).absolutePath
+    }
 }

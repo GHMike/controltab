@@ -3,6 +3,7 @@ package com.mike.cn.controltab.ui.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.AssetFileDescriptor
 import android.os.Build
 import android.os.Environment
 import android.util.Log
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig.IS_ACTIVATE
 import com.mike.cn.controltab.app.ConnectConfig.VIDEO_PATH
+import com.mike.cn.controltab.tools.FileHelper
 import com.mike.cn.controltab.ui.base.BaseActivity
 import com.tencent.mmkv.MMKV
 import xyz.doikki.videoplayer.player.BaseVideoView.SCREEN_SCALE_MATCH_PARENT
@@ -76,13 +78,12 @@ class IndexActivity : BaseActivity() {
      */
     fun setVideoPlayer() {
 
-        // 获取下载文件夹目录
-        val downloadDirectory =
-            applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
         // 读取文件
-        val filePath = "$downloadDirectory/test.mp4" // 替换为实际的文件名
+        FileHelper().copyAssetToInternalStorage(this, "mainVideo.mp4")
+        val filePath: String = FileHelper().getInternalStoragePath(this, "mainVideo.mp4")
+        Log.e("默认路径", filePath)
         val path = MMKV.defaultMMKV().getString(VIDEO_PATH, filePath)
-        if (!File(path!!).exists())
+        if (!File(path!!).exists() && !File(filePath).exists())
             default_iv?.visibility = View.VISIBLE
         else
             default_iv?.visibility = View.GONE
@@ -92,7 +93,10 @@ class IndexActivity : BaseActivity() {
         videoView?.setLooping(true)
         //设置满屏
         videoView?.setScreenScaleType(SCREEN_SCALE_MATCH_PARENT)
-        videoView!!.setUrl(path) //设置视频地址
+        if (File(path).exists())
+            videoView!!.setUrl(path) //设置视频地址
+        else
+            videoView!!.setUrl(filePath) //设置初始视频地址
         videoView?.release()
         videoView?.start()
     }

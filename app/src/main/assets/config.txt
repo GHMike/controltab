@@ -4,27 +4,27 @@
     "type": "1",
     "name": "K 歌",
     "code": "FE A6 CE 00",
-    "image": ""
+    "image": "t1_1"
   },
   {
     "id": "2",
     "type": "2",
-    "name": "动感",
-    "code": "FE A7 CE 00",
+    "name": "清洁",
+    "code": "FE 44 CE 00",
     "image": ""
   },
   {
     "id": "3",
     "type": "2",
-    "name": "浪漫",
-    "code": "FE A8 CE 00",
+    "name": "明亮",
+    "code": "FE 45 CE 00",
     "image": ""
   },
   {
     "id": "4",
     "type": "2",
-    "name": "抒情",
-    "code": "FE A9 CE 00",
+    "name": " 待客",
+    "code": "FE 46 CE 00",
     "image": ""
   },
   {
@@ -32,146 +32,146 @@
     "type": "1",
     "name": "DJ",
     "code": "FE 33 CE 00",
-    "image": ""
+    "image": "t1_2"
   },
   {
     "id": "6",
     "type": "1",
     "name": "沉浸式",
-    "code": "FE 34 CE 00",
-    "image": ""
+    "code": "FE 36 CE 00",
+    "image": "t1_3"
   },
   {
     "id": "7",
     "type": "1",
     "name": "开场秀",
-    "code": "FE 35 CE 00",
-    "image": ""
+    "code": "FE 41 CE 00",
+    "image": "t1_4"
   },
   {
     "id": "8",
     "type": "1",
     "name": "电音",
-    "code": "FE 36 CE 00",
-    "image": ""
+    "code": "FE 42 CE 00",
+    "image": "t1_5"
+  },
+  {
+     "id": "16",
+     "type": "1",
+     "name": "生日",
+     "code": "FE 43 CE 00",
+     "image": "t1_6"
   },
   {
     "id": "9",
     "type": "2",
-    "name": "点唱",
-    "code": "FE 37 CE 00",
+    "name": "轰趴",
+    "code": "FE 47 CE 00",
     "image": ""
   },
   {
     "id": "10",
     "type": "2",
-    "name": "待客",
-    "code": "FE 38 CE 00",
+    "name": "hiphot",
+    "code": "FE 48 CE 00",
     "image": ""
   },
   {
     "id": "11",
     "type": "2",
-    "name": "选秀",
-    "code": "FE 39 CE 00",
+    "name": "出酒",
+    "code": "FE 49 CE 00",
     "image": ""
   },
   {
     "id": "12",
     "type": "2",
-    "name": "私人",
-    "code": "FE 40 CE 00",
+    "name": "动漫",
+    "code": "FE 50 CE 00",
     "image": ""
   },
   {
     "id": "13",
     "type": "2",
-    "name": "出酒",
-    "code": "FE 41 CE 00",
+    "name": "沙漠",
+    "code": "FE 51 CE 00",
     "image": ""
   },
   {
     "id": "14",
     "type": "2",
-    "name": "轰趴",
-    "code": "FE 42 CE 00",
+    "name": "瀑布",
+    "code": "FE 52 CE 00",
     "image": ""
   },
   {
     "id": "15",
     "type": "2",
-    "name": "hiphot",
-    "code": "FE 43 CE 00",
-    "image": ""
-  },
-  {
-    "id": "16",
-    "type": "1",
-    "name": "生日",
-    "code": "FE 44 CE 00",
+    "name": "海洋",
+    "code": "FE 53 CE 00",
     "image": ""
   },
   {
     "id": "17",
     "type": "2",
-    "name": "春天",
-    "code": "FE 45 CE 00",
+    "name": "星际",
+    "code": "FE 54 CE 00",
     "image": ""
   },
   {
     "id": "18",
     "type": "2",
-    "name": "夏天",
-    "code": "FE 46 CE 00",
+    "name": "梦幻",
+    "code": "FE 55 CE 00",
     "image": ""
   },
   {
     "id": "19",
     "type": "2",
-    "name": "秋天",
-    "code": "FE 47 CE 00",
+    "name": "私人",
+    "code": "FE 56 CE 00",
     "image": ""
   },
   {
     "id": "20",
     "type": "2",
-    "name": "冬天",
-    "code": "FE 48 CE 00",
+    "name": "选秀",
+    "code": "FE 57 CE 00",
     "image": ""
   },
   {
     "id": "21",
     "type": "2",
-    "name": "节日",
-    "code": "FE 49 CE 00",
+    "name": "春天",
+    "code": "FE 58 CE 00",
     "image": ""
   },
   {
     "id": "22",
     "type": "2",
-    "name": "沙漠",
-    "code": "FE 50 CE 00",
+    "name": "夏天",
+    "code": "FE 59 CE 00",
     "image": ""
   },
   {
     "id": "23",
     "type": "2",
-    "name": "瀑布",
-    "code": "FE 51 CE 00",
+    "name": "秋天",
+    "code": "FE 60 CE 00",
     "image": ""
   },
   {
     "id": "24",
     "type": "2",
-    "name": "海洋",
-    "code": "FE 52 CE 00",
+    "name": "冬天",
+    "code": "FE 61 CE 00",
     "image": ""
   },
   {
     "id": "26",
     "type": "2",
-    "name": "更多模式",
-    "code": "FE 53 CE 00",
+    "name": "更多节日模式",
+    "code": "FE 62 CE 00",
     "image": "main"
   },
   {
@@ -192,265 +192,265 @@
     "id": "28",
     "type": "DJ",
     "name": "DJ2",
-    "code": "FE 33 CE 00",
+    "code": "FE 34 CE 00",
     "image": ""
   },
   {
     "id": "29",
     "type": "DJ",
     "name": "DJ3",
-    "code": "FE 33 CE 00",
+    "code": "FE 35 CE 00",
     "image": ""
   },
   {
     "id": "30",
     "type": "cjx",
     "name": "沉浸式1",
-    "code": "FE 34 CE 00",
+    "code": "FE 36 CE 00",
     "image": ""
   },
   {
     "id": "31",
     "type": "cjx",
     "name": "沉浸式2",
-    "code": "FE 34 CE 00",
+    "code": "FE 37 CE 00",
     "image": ""
   },
   {
     "id": "32",
     "type": "cjx",
     "name": "沉浸式3",
-    "code": "FE 34 CE 00",
+    "code": "FE 38 CE 00",
     "image": ""
   },
   {
     "id": "33",
     "type": "cjx",
     "name": "沉浸式4",
-    "code": "FE 34 CE 00",
+    "code": "FE 39 CE 00",
     "image": ""
   },
   {
     "id": "34",
     "type": "cjx",
     "name": "沉浸式5",
-    "code": "FE 34 CE 00",
+    "code": "FE 40 CE 00",
     "image": ""
   },
   {
     "id": "35",
     "type": "kg",
-    "name": "K歌1",
-    "code": "FE A6 CE 00",
+    "name": "动感",
+    "code": "FE A7 CE 00",
     "image": ""
   },
   {
     "id": "36",
     "type": "kg",
-    "name": "K歌2",
-    "code": "FE A6 CE 00",
+    "name": "浪漫",
+    "code": "FE A8 CE 00",
     "image": ""
   },
   {
     "id": "37",
     "type": "kg",
-    "name": "K歌3",
-    "code": "FE A6 CE 00",
+    "name": "抒情",
+    "code": "FE A 9 CE 00",
     "image": ""
   },
   {
     "id": "38",
     "type": "kg",
-    "name": "K歌4",
-    "code": "FE A6 CE 00",
+    "name": "柔和",
+    "code": "FE AD CE 00",
     "image": ""
   },
   {
     "id": "39",
     "type": "kg",
-    "name": "K歌5",
-    "code": "FE A6 CE 00",
+    "name": "激情",
+    "code": "FE AE CE 00",
     "image": ""
   },
   {
     "id": "40",
     "type": "hzh",
     "name": "开窗",
-    "code": "",
+    "code": "FE 83 CE 00",
     "image": ""
   },
   {
     "id": "41",
     "type": "hzh",
     "name": "透明",
-    "code": "",
+    "code": "FE 82 CE 00",
     "image": ""
   },
   {
     "id": "42",
     "type": "hzh",
     "name": " 关窗",
-    "code": "",
+    "code": "FE 81 CE 00",
     "image": ""
   },
   {
     "id": "43",
     "type": "yykz",
     "name": "碟机",
-    "code": "",
+    "code": "FE A1 CE 00 FE A1 CE 00",
     "image": ""
   },
   {
     "id": "44",
     "type": "yykz",
     "name": "点歌机",
-    "code": "",
+    "code": "FE A2 CE 00 FE A2 CE 00",
     "image": ""
   },
   {
     "id": "45",
     "type": "yykz",
     "name": "外置",
-    "code": "",
+    "code": "FE A3 CE 00 FE A3 CE 00",
     "image": ""
   },
   {
     "id": "46",
     "type": "yykz",
     "name": "效果器输出",
-    "code": "",
+    "code": "FE A5 CE 00 FE A5 CE 00",
     "image": ""
   },
   {
     "id": "47",
     "type": "yykz",
     "name": "处理器输出",
-    "code": "",
+    "code": "FE A4 CE 00 FE A4 CE 00",
     "image": ""
   },{
         "id": "j1",
         "type": "more",
         "name": "春节",
-        "code": "",
+        "code": "FE 63 CE 00",
         "image": ""
       },
       {
         "id": "j2",
         "type": "more",
-        "name": "元宵",
-        "code": "",
+        "name": "元旦",
+        "code": "FE 64 CE 00",
         "image": ""
       },
       {
         "id": "j3",
         "type": "more",
-        "name": "三八",
-        "code": "",
+        "name": "元宵",
+        "code": "FE 65 CE 00",
         "image": ""
       },
       {
         "id": "j4",
         "type": "more",
-        "name": "清明",
-        "code": "",
+        "name": "三八",
+        "code": "FE 66 CE 00",
         "image": ""
       },
       {
         "id": "j5",
         "type": "more",
-        "name": "五一",
-        "code": "",
+        "name": "清明",
+        "code": "FE 67 CE 00",
         "image": ""
       },
       {
         "id": "j6",
         "type": "more",
-        "name": "母亲",
-        "code": "",
+        "name": "五一",
+        "code": "FE 68 CE 00",
         "image": ""
       },
       {
         "id": "j7",
         "type": "more",
-        "name": "父亲",
-        "code": "",
+        "name": "端午",
+        "code": "FE 69 CE 00",
         "image": ""
       },
       {
         "id": "j8",
         "type": "more",
-        "name": "端午",
-        "code": "",
+        "name": "八一",
+        "code": "FE 70 CE 00",
         "image": ""
       },
       {
         "id": "j9",
         "type": "more",
-        "name": "八一",
-        "code": "",
+        "name": "中秋",
+        "code": "FE 71 CE 00",
         "image": ""
       },
       {
         "id": "j10",
         "type": "more",
-        "name": "情人",
-        "code": "",
+        "name": "国庆",
+        "code": "FE 72 CE 00",
         "image": ""
       },
       {
         "id": "j11",
         "type": "more",
-        "name": "中秋",
-        "code": "",
+        "name": "重阳",
+        "code": "FE 73 CE 00",
         "image": ""
       },
       {
         "id": "j12",
         "type": "more",
-        "name": "国庆",
-        "code": "",
+        "name": "圣诞",
+        "code": "FE 74 CE 00",
         "image": ""
       },
       {
         "id": "j13",
         "type": "more",
-        "name": "重阳",
-        "code": "",
+        "name": "情人",
+        "code": "FE 75 CE 00",
         "image": ""
       },
       {
         "id": "j14",
         "type": "more",
-        "name": "圣诞",
-        "code": "",
+        "name": "结婚",
+        "code": "FE 76 CE 00",
         "image": ""
       },
       {
         "id": "j15",
         "type": "more",
-        "name": "元旦",
-        "code": "",
+        "name": "父亲",
+        "code": "FE 77 CE 00",
         "image": ""
       },
       {
         "id": "j16",
         "type": "more",
-        "name": "结婚",
-        "code": "",
+        "name": "母亲",
+        "code": "FE 78 CE 00",
         "image": ""
       },
       {
         "id": "j17",
         "type": "more",
-        "name": "霸屏",
-        "code": "",
+        "name": "活动",
+        "code": "FE 79 CE 00",
         "image": ""
       },
       {
         "id": "j18",
         "type": "more",
-        "name": "活动",
-        "code": "",
+        "name": "霸屏",
+        "code": "FE 80 CE 00",
         "image": ""
       }
 

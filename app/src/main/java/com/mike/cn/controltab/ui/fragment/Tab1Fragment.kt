@@ -1,16 +1,18 @@
 package com.mike.cn.controltab.ui.fragment
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.model.MenuInfoModel
@@ -26,6 +28,7 @@ import razerdp.basepopup.BasePopupWindow
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@SuppressLint("SetTextI18n")
 class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClickListener {
 
 
@@ -273,6 +276,14 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     private fun setPopupViewAndData(v: View, type: String) {
         popupWindowDataType = type
         val rvPopData: RecyclerView = v.findViewById(R.id.rv_data)
+        val vVolume: View = v.findViewById(R.id.v_volume)
+        val sbVolume: SeekBar = v.findViewById(R.id.sb_volume)
+        val tvVolume: TextView = v.findViewById(R.id.tv_volume)
+        if (type == "yykz") {
+            vVolume.visibility = View.VISIBLE
+        } else {
+            vVolume.visibility = View.GONE
+        }
         rvPopData.layoutManager =
             GridLayoutManager(
                 context,
@@ -291,6 +302,27 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             playRaw()
             playAn(view)
         }
+        //音量
+        sbVolume.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                tvVolume.text = "${progress}%"
+                /* 进度变化时的操作 */
+//                EE B1 11 00 06 00 0A 13 00 00 00 00 FF FC FF FF--
+//                EE B1 11 00 06 00 0A 13 00 00 00 64 FF FC FF FF 第65通道0-100背光光值对应25
+                val hexadecimalNumber = java.lang.String.format("%02X", progress)
+                val allCode = "EE B1 11 00 06 00 0A 13 00 00 00 $hexadecimalNumber FF FC FF FF"
+                Log.i("111111", allCode + progress.toString())
+                UdpUtil.getInstance().sendUdpCommand(allCode)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                // 开始拖动时的操作
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                // 停止拖动时的操作
+            }
+        })
 
         myPopAdapter.setList(ConfigHelper().getConfigMenuList(type))
     }
