@@ -4,67 +4,67 @@
     "type": "1",
     "name": "切歌",
     "code": "",
-    "image": ""
+    "image": "t3_1"
   },{
     "id": "2",
     "type": "1",
     "name": "音量重置",
     "code": "",
-    "image": ""
+    "image": "t3_2"
   },{
     "id": "3",
     "type": "1",
     "name": "原唱/伴唱",
     "code": "",
-    "image": ""
+    "image": "t3_3"
   },{
     "id": "4",
     "type": "1",
     "name": "音乐播放",
     "code": "",
-    "image": ""
+    "image": "t3_4"
   },{
     "id": "5",
     "type": "1",
     "name": "音乐暂停",
     "code": "",
-    "image": ""
+    "image": "t3_5"
   },{
     "id": "6",
     "type": "1",
     "name": "音乐音量",
     "code": "",
-    "image": ""
+    "image": "t3_6"
   },{
     "id": "7",
     "type": "1",
     "name": "音乐音量",
     "code": "",
-    "image": ""
+    "image": "t3_7"
   },{
     "id": "8",
     "type": "1",
     "name": "音乐静音",
     "code": "",
-    "image": ""
+    "image": "t3_8"
   },{
     "id": "9",
     "type": "1",
     "name": "音乐非静音",
     "code": "",
-    "image": ""
+    "image": "t3_9"
   },{
     "id": "10",
     "type": "1",
     "name": "关麦克风",
     "code": "",
-    "image": ""
+    "image": "t3_10"
   },{
     "id": "11",
     "type": "1",
     "name": "开麦克风",
     "code": "",
-    "image": ""
+    "image": "t3_11"
   },{
     "id": "12",
     "type": "2",
@@ -76,73 +76,73 @@
     "type": "2",
     "name": "空调电源开",
     "code": "",
-    "image": ""
+    "image": "t4_1"
   },{
     "id": "14",
     "type": "2",
     "name": "空调电源关",
     "code": "",
-    "image": ""
+    "image": "t4_2"
   },{
     "id": "15",
     "type": "2",
     "name": "空调温度",
     "code": "",
-    "image": ""
+    "image": "t4_3"
   },{
     "id": "16",
     "type": "2",
     "name": "空调温度",
     "code": "",
-    "image": ""
+    "image": "t4_4"
   },{
     "id": "17",
     "type": "2",
     "name": "制热模式",
     "code": "",
-    "image": ""
+    "image": "t4_5"
   },{
     "id": "18",
     "type": "2",
     "name": "制冷模式",
     "code": "",
-    "image": ""
+    "image": "t4_6"
   },{
     "id": "19",
     "type": "2",
     "name": "除湿模式",
     "code": "",
-    "image": ""
+    "image": "t4_7"
   },{
     "id": "20",
     "type": "2",
     "name": "低风模式",
     "code": "",
-    "image": ""
+    "image": "t4_8"
   },{
     "id": "21",
     "type": "2",
     "name": "中风模式",
     "code": "",
-    "image": ""
+    "image": "t4_9"
   },{
     "id": "22",
     "type": "2",
     "name": "高风模式",
     "code": "",
-    "image": ""
+    "image": "t4_10"
   },{
     "id": "23",
     "type": "2",
     "name": "排风开",
     "code": "",
-    "image": ""
+    "image": "t4_11"
   },{
     "id": "24",
     "type": "2",
     "name": "排风关",
     "code": "",
-    "image": ""
+    "image": "t4_12"
   },{
     "id": "25",
     "type": "2",

@@ -91,10 +91,10 @@ class Tab2Fragment : Fragment(), CustomDialog.OnButtonClickListener {
             if (myAdapter?.getItem(position)?.id == MORE_ID) {
 //                val intent = Intent(context, MoreActivity::class.java)
 //                startActivity(intent)
+                UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
                 getMainActivity()?.goFragment(MoreFragment.newInstance("", ""), true)
             } else {
                 UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
-
             }
         }
 

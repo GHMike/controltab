@@ -9,6 +9,7 @@ public class ConnectConfig {
     public static final String PASS_TAG = "PASS_TAG";
     public static final String IP_ADDS = "ipadds";
     public static final String IS_EDIT = "IS_EDIT";
+    public static final String VOLUME = "volume";
     public static final String IS_ACTIVATE = "is_activate";
     /*
     //配置文件修改的情况下是不变的

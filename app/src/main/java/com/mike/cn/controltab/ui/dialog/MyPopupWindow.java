@@ -1,9 +1,11 @@
 package com.mike.cn.controltab.ui.dialog;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.OvershootInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
@@ -50,13 +52,28 @@ public class MyPopupWindow extends BasePopupWindow {
     protected Animation onCreateShowAnimation() {
         Animation slideDownAnimation = new TranslateAnimation(0, 0, -100, 0);
         slideDownAnimation.setDuration(500);
-        return slideDownAnimation;
+        ScaleAnimation enterAnimation = new ScaleAnimation(
+                0.5f, 1f,
+                0.5f, 1f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+        enterAnimation.setDuration(500);
+        enterAnimation.setInterpolator(new OvershootInterpolator());
+        return enterAnimation;
     }
 
     @Override
     protected Animation onCreateDismissAnimation() {
         Animation slideDownAnimation = new TranslateAnimation(0, 0, 0, -100);
         slideDownAnimation.setDuration(300);
-        return slideDownAnimation;
+        ScaleAnimation exitAnimation = new ScaleAnimation(
+                1f, 0.5f,
+                1f, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+        );
+        exitAnimation.setDuration(200);
+        return exitAnimation;
     }
 }

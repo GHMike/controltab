@@ -169,13 +169,14 @@ class FindIpActivity : BaseActivity(), View.OnClickListener {
         val sendJson = Gson().toJson(sendInfo)
         when (type) {
             0, 1 -> {
-                UdpUtil.getInstance().sendUdpCommand(sendJson)
+                UdpUtil.getInstance().sendUdpCommand(sendJson, false)
             }
             2, 3 -> {
                 var portNum = 9999
                 if (gb_port?.text.toString().isNotEmpty())
                     portNum = gb_port?.text.toString().toInt()
-                UdpUtil.getInstance().sendUdpCommand(sendJson, gb_adds?.text.toString(), portNum)
+                UdpUtil.getInstance()
+                    .sendUdpCommand(sendJson, false, gb_adds?.text.toString(), portNum)
 
                 mmkv.putString(GB_TAG, gb_adds?.text.toString())
                 mmkv.putString(GBPORT_TAG, portNum.toString())

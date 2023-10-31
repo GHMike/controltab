@@ -61,7 +61,8 @@ class MainActivity : BaseActivity() {
 
             when (i) {
                 R.id.rb1 -> {
-                    displayFragment(Tab1Fragment.newInstance("", ""), true)
+//                    displayFragment(Tab1Fragment.newInstance("", ""), true)
+                    displayFragment(MainFragment.newInstance("", ""), true)
                 }
                 R.id.rb2 -> {
                     displayFragment(Tab2Fragment.newInstance("", ""), true)

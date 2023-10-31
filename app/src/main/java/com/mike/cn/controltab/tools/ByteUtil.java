@@ -1,8 +1,11 @@
 package com.mike.cn.controltab.tools;
 
+import android.util.Log;
+
 import java.nio.charset.StandardCharsets;
 
 /**
+ *
  */
 public class ByteUtil {
 
@@ -30,8 +33,8 @@ public class ByteUtil {
     /**
      * 十六进制字节数组转字符串
      *
-     * @param src 目标数组
-     * @param dec 起始位置
+     * @param src    目标数组
+     * @param dec    起始位置
      * @param length 长度
      * @return
      */
@@ -131,6 +134,16 @@ public class ByteUtil {
             result[i] = (byte) (hexChar2byte(achar[pos]) << 4 | hexChar2byte(achar[pos + 1]));
         }
         return result;
+    }
+
+    public static byte[] hexStringToByteArray(String hex) {
+        int len = hex.length();
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4)
+                    + Character.digit(hex.charAt(i + 1), 16));
+        }
+        return data;
     }
 
     /**

@@ -15,6 +15,7 @@ import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.app.ConnectConfig.TEMPERATURE_TAG
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
+import com.mike.cn.controltab.tools.FileHelper
 import com.mike.cn.controltab.tools.UdpUtil
 import com.mike.cn.controltab.ui.dialog.CustomDialog
 import com.tencent.mmkv.MMKV
@@ -204,8 +205,14 @@ class Tab4Fragment : Fragment(), CustomDialog.OnButtonClickListener {
                         nv.tag = j.code
                         iv.tag = j.image
                         activity?.let {
-                            Glide.with(it).load(j.image).error(R.mipmap.ic_launcher_round)
-                                .into(iv)
+                            val resId = FileHelper().getMipmapResId(it, j.image!!)
+                            if (resId != R.mipmap.ic_launcher_round) {
+                                Glide.with(it).load(resId).error(R.mipmap.ic_launcher_round)
+                                    .into(iv)
+                            } else {
+                                Glide.with(it).load(j.image).error(R.mipmap.ic_launcher_round)
+                                    .into(iv)
+                            }
                         }
                     }
                     "12" -> {

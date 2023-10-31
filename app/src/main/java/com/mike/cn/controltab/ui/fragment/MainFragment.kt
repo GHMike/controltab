@@ -7,16 +7,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mike.cn.controltab.R
 import com.mike.cn.controltab.app.ConnectConfig
 import com.mike.cn.controltab.model.MenuInfoModel
 import com.mike.cn.controltab.tools.ConfigHelper
+import com.mike.cn.controltab.tools.FileHelper
 import com.mike.cn.controltab.tools.UdpUtil
 import com.mike.cn.controltab.ui.adapters.MenuAdapter
 import com.mike.cn.controltab.ui.dialog.CustomDialog
@@ -29,15 +32,13 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 @SuppressLint("SetTextI18n")
-class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClickListener {
+class MainFragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClickListener {
 
 
     private var mediaPlayer: MediaPlayer? = null
     private var param1: String? = null
     private var param2: String? = null
 
-    private var rvData: RecyclerView? = null
-    private var myAdapter: MenuAdapter? = null
     private var but1: TextView? = null
     private var but2: TextView? = null
     private var tv_code1: TextView? = null
@@ -53,6 +54,35 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     private var myPopAdapter = MenuAdapter()
 
 
+    private var viewArrayId = arrayOf(
+        R.id.but_1,
+        R.id.but_2,
+        R.id.but_3,
+        R.id.but_4,
+        R.id.but_5,
+        R.id.but_6,
+    )
+    private var nameVArrayId = arrayOf(
+        R.id.tv_name1,
+        R.id.tv_name2,
+        R.id.tv_name3,
+        R.id.tv_name4,
+        R.id.tv_name5,
+        R.id.tv_name6,
+    )
+    private var imaVArrayId = arrayOf(
+        R.id.iv_img1,
+        R.id.iv_img2,
+        R.id.iv_img3,
+        R.id.iv_img4,
+        R.id.iv_img5,
+        R.id.iv_img6,
+    )
+    private var viewArray = arrayListOf<View>()
+    private var nameVArray = arrayListOf<TextView>()
+    private var imgVArray = arrayListOf<ImageView>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -65,14 +95,13 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = inflater.inflate(R.layout.fragment_tab1, container, false)
+        val v = inflater.inflate(R.layout.fragment_main, container, false)
         initW(v)
         return v
     }
 
 
     private fun initW(v: View) {
-        rvData = v.findViewById(R.id.rv_data)
         but1 = v.findViewById(R.id.but1)
         but2 = v.findViewById(R.id.but2)
         tv_code1 = v.findViewById(R.id.tv_code1)
@@ -83,42 +112,89 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         but2?.setOnClickListener(this)
         but3?.setOnClickListener(this)
         but4?.setOnClickListener(this)
-        rvData?.layoutManager = GridLayoutManager(context, 3)
-        myAdapter = MenuAdapter()
-        rvData?.adapter = myAdapter
-        myAdapter?.setOnItemLongClickListener { _, _, position ->
-            val item = myAdapter?.getItem(position)
-            if (isEdit) {
-//                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
-                showCustomDialog(myAdapter!!.getItem(position))
-//                }
-            }
-            true
-        }
-        myAdapter?.setOnItemClickListener() { adapter, view, position ->
-            val item = myAdapter?.getItem(position)
-            when (item?.id) {
-                "1" -> {
-                    showPop(view, "kg")
-                }
-                "5" -> {
-                    showPop(view, "DJ")
-                }
-                "6" -> {
-                    showPop(view, "cjx")
-                }
-                else -> {
-                    UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
-                }
-            }
-            playRaw()
-            playAn(view)
 
+        //循环找控件
+        viewArrayId.forEachIndexed { index, i ->
+            val vv: View = v.findViewById(viewArrayId[index])
+            viewArray.add(vv)
+            val namev: TextView = v.findViewById(nameVArrayId[index])
+            nameVArray.add(namev)
+            val imgv: ImageView = v.findViewById(imaVArrayId[index])
+            imgVArray.add(imgv)
+
+            vv.setOnClickListener {
+                val nameV = nameVArray[viewArray.indexOf(it)]
+                val vv = viewArray[viewArray.indexOf(it)]
+
+                when (vv.tag) {
+                    "1" -> {
+                        showPop(vv, "kg")
+                    }
+                    "5" -> {
+                        showPop(vv, "DJ")
+                    }
+                    "6" -> {
+                        showPop(vv, "cjx")
+                    }
+                    "7" -> {
+                        showPop(vv, "temp1")
+                    }
+                    "8" -> {
+                        showPop(vv, "temp2")
+                    }
+                    "16" -> {
+                        showPop(vv, "temp3")
+                    }
+                    else -> {
+
+                    }
+                }
+                if (nameV.tag != null) {
+                    UdpUtil.getInstance().sendUdpCommand(nameV.tag.toString())
+                }
+
+                playRaw()
+                playAn(it)
+            }
+
+            vv.setOnLongClickListener {
+                if (isEdit) {
+                    showCustomDialog(viewArray.indexOf(it))
+                }
+                true
+            }
         }
+//        myAdapter?.setOnItemLongClickListener { _, _, position ->
+//            val item = myAdapter?.getItem(position)
+//            if (isEdit) {
+////                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
+//                showCustomDialog(myAdapter!!.getItem(position))
+////                }
+//            }
+//            true
+//        }
+//        myAdapter?.setOnItemClickListener() { adapter, view, position ->
+//            val item = myAdapter?.getItem(position)
+//            when (item?.id) {
+//                "1" -> {
+//                    showPop(view, "kg")
+//                }
+//                "5" -> {
+//                    showPop(view, "DJ")
+//                }
+//                "6" -> {
+//                    showPop(view, "cjx")
+//                }
+//                else -> {
+//                    UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
+//                }
+//            }
+//            playRaw()
+//            playAn(view)
+//
+//        }
         initData()
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
-
-
         but1?.setOnLongClickListener {
             if (isEdit) {
                 showCustomDialog(but1!!)
@@ -131,6 +207,8 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             }
             true
         }
+
+
     }
 
 
@@ -140,12 +218,10 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         mCustomPopWindow?.setContentView(R.layout.popup_layout)
         setPopupViewAndData(mCustomPopWindow?.contentView!!, type)
         mCustomPopWindow?.setBlurBackgroundEnable(true)
-        mCustomPopWindow?.showPopupWindow(v)
+        mCustomPopWindow?.showPopupWindow()
     }
 
     private fun initData() {
-        myAdapter?.setList(ConfigHelper().getConfigMenuList("1"))
-
         //获取固定配置
         val infoList = ConfigHelper().getConfigFixedMenuList("3")
         for (j in infoList) {
@@ -160,10 +236,56 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
                 tv_code2?.text = j.image
             }
         }
+
+        val mainList = ConfigHelper().getConfigMenuList("1")
+        viewArray.forEachIndexed { index, view ->
+            val vv = viewArray[index]
+            val nv = nameVArray[index]
+            val iv = imgVArray[index]
+
+            for (j in mainList) {
+                if (j.id == vv.tag) {
+                    nv.text = j.name
+                    nv.tag = j.code
+                    iv.tag = j.image
+                    activity?.let {
+                        val resId = FileHelper().getMipmapResId(it, j.image!!)
+                        if (resId != R.mipmap.ic_launcher_round) {
+                            Glide.with(it).load(resId).error(R.mipmap.ic_launcher_round)
+                                .into(iv)
+                        } else {
+                            Glide.with(it).load(j.image).error(R.mipmap.ic_launcher_round)
+                                .into(iv)
+                        }
+
+                    }
+//                    break
+                }
+            }
+        }
     }
 
     //列表修改弹窗
     private fun showCustomDialog(data: MenuInfoModel) {
+        if (dialog == null) {
+            dialog = CustomDialog(activity, data, this)
+        } else {
+            dialog?.setData(data)
+        }
+        dialog?.show()
+    }
+
+    //显示修改窗
+    private fun showCustomDialog(index: Int) {
+        val data = MenuInfoModel(0)
+        val vv = viewArray[index]
+        val name = nameVArray[index]
+        val imag = imgVArray[index]
+        data.id = vv.tag.toString()
+        data.type = "1"
+        data.code = name.tag.toString()
+        data.name = name.text.toString()
+        data.image = imag.tag.toString()
         if (dialog == null) {
             dialog = CustomDialog(activity, data, this)
         } else {
@@ -196,7 +318,7 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Tab1Fragment().apply {
+            MainFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -288,11 +410,19 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         } else {
             vVolume.visibility = View.GONE
         }
-        rvPopData.layoutManager =
-            GridLayoutManager(
-                context,
-                if (type == "cjx" || type == "kg" || type == "yykz") 5 else 3
-            )
+
+        var countNum = 3
+        when (type) {
+            "cjx", "kg", "yykz" ->
+                countNum = 5
+            "temp1", "temp2", "temp3" ->
+                countNum = 2
+        }
+
+        val layoutManager = GridLayoutManager(context, countNum)
+        // 设置居中对齐
+        rvPopData.layoutManager = layoutManager
+
         myPopAdapter = MenuAdapter()
         rvPopData.adapter = myPopAdapter
         myPopAdapter.setOnItemLongClickListener { _, _, position ->
@@ -311,8 +441,6 @@ class Tab1Fragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 tvVolume.text = "${progress}%"
                 /* 进度变化时的操作 */
-//                EE B1 11 00 06 00 0A 13 00 00 00 00 FF FC FF FF--
-//                EE B1 11 00 06 00 0A 13 00 00 00 64 FF FC FF FF 第65通道0-100背光光值对应25
                 val hexadecimalNumber = java.lang.String.format("%02X", progress)
                 val allCode = "EE B1 11 00 06 00 0A 13 00 00 00 $hexadecimalNumber FF FC FF FF"
                 Log.i("111111", allCode + progress.toString())

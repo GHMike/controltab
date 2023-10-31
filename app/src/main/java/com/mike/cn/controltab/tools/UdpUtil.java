@@ -49,17 +49,24 @@ public class UdpUtil {
         return instance;
     }
 
-    public void sendUdpCommand(String command) {
+    public void sendUdpCommand(String command, boolean isConvert) {
         UDP_PORT = MMKV.defaultMMKV().getInt(PORT_NUM, 9999);
         HOST_IP = MMKV.defaultMMKV().getString(IP_ADDS, "192.168.0.1");
-        SendUdpTask sendUdpTask = new SendUdpTask(command);
+        SendUdpTask sendUdpTask = new SendUdpTask(command, isConvert);
         executorService.submit(sendUdpTask);
     }
 
-    public void sendUdpCommand(String command, String adds, int port) {
+    public void sendUdpCommand(String command) {
+        UDP_PORT = MMKV.defaultMMKV().getInt(PORT_NUM, 9999);
+        HOST_IP = MMKV.defaultMMKV().getString(IP_ADDS, "192.168.0.1");
+        SendUdpTask sendUdpTask = new SendUdpTask(command, true);
+        executorService.submit(sendUdpTask);
+    }
+
+    public void sendUdpCommand(String command, boolean isConvert, String adds, int port) {
         HOST_IP = adds;
         UDP_PORT = port;
-        SendUdpTask sendUdpTask = new SendUdpTask(command);
+        SendUdpTask sendUdpTask = new SendUdpTask(command, isConvert);
         executorService.submit(sendUdpTask);
     }
 
@@ -94,16 +101,24 @@ public class UdpUtil {
 
     private class SendUdpTask implements Runnable {
         private String command;
+        private boolean isConvert = true;
 
-        SendUdpTask(String command) {
-            this.command = ByteUtil.str2HexString(command);
+        SendUdpTask(String command, boolean isConvert) {
+            this.isConvert = isConvert;
+            if (isConvert) {
+                this.command = command.replace(" ", "");
+            } else {
+                this.command = command;
+            }
         }
 
         @Override
         public void run() {
 
-
             byte[] sendData = command.getBytes();
+            if (isConvert) {
+                sendData = ByteUtil.hexStringToByteArray(command);
+            }
             InetAddress destinationAddress;
             try {
                 if (udpSocket == null) {
@@ -119,6 +134,7 @@ public class UdpUtil {
             }
         }
     }
+
 
     private class ReceiveUdpTask implements Runnable {
         @Override

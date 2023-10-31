@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
+    android:layout_gravity="center"
+    android:layout_margin="100dp"
     android:background="@drawable/bg_popup_gradation_border"
     android:orientation="horizontal"
-    android:padding="10dp"
-    tools:context=".ui.fragment.Tab1Fragment">
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/v_volume"
@@ -15,11 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <SeekBar
             android:id="@+id/sb_volume"
-            android:layout_width="500dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:theme="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:thumbTintMode="screen" />
@@ -36,8 +35,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_data"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true" />
+        android:layout_below="@+id/v_volume"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp" />
 </RelativeLayout>
