@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
@@ -56,7 +57,7 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
         but4?.setOnClickListener(this)
         but5?.setOnClickListener(this)
         but_sys?.setOnClickListener(this)
-        but_sys?.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
+//        but_sys?.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
 
         val isEdit = MMKV.defaultMMKV().getBoolean(ConnectConfig.IS_EDIT, false)
         sEdit?.isChecked = isEdit
@@ -90,11 +91,7 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
             }
             //重置配置文件
             R.id.but_sys -> {
-                val defaultInfo = MMKV.defaultMMKV()
-                val config: String = FileHelper().getTxtContent(context, "config.txt")
-                val config2: String = FileHelper().getTxtContent(context, "config2.txt")
-                defaultInfo.encode("config", config)
-                defaultInfo.encode("config2", config2)
+                showConfirmationDialog()
             }
             R.id.but3_1 -> {
                 PictureSelector.create(this)
@@ -137,4 +134,27 @@ class ExpertSettingActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    private fun showConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("确认操作")
+        builder.setMessage("您确定要执行此操作吗？")
+
+        // 确认按钮
+        builder.setPositiveButton("确定") { dialog, _ ->
+            val defaultInfo = MMKV.defaultMMKV()
+            val config: String = FileHelper().getTxtContent(context, "config.txt")
+            val config2: String = FileHelper().getTxtContent(context, "config2.txt")
+            defaultInfo.encode("config", config)
+            defaultInfo.encode("config2", config2)
+            Toast.makeText(this, "重置成功，重新回到视频播放页！", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+        // 取消按钮
+        builder.setNegativeButton("取消") { dialog, _ ->
+            dialog.dismiss()
+        }
+        // 创建并显示弹窗
+        val dialog = builder.create()
+        dialog.show()
+    }
 }

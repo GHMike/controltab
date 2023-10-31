@@ -96,7 +96,7 @@ public class UdpUtil {
         private String command;
 
         SendUdpTask(String command) {
-            this.command = command;
+            this.command = ByteUtil.str2HexString(command);
         }
 
         @Override
