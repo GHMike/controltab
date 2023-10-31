@@ -32,7 +32,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 @SuppressLint("SetTextI18n")
-class MainFragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClickListener {
+class MainFragment : Fragment(), CustomDialog.OnButtonClickListener {
 
 
     private var mediaPlayer: MediaPlayer? = null
@@ -108,10 +108,30 @@ class MainFragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
         tv_code2 = v.findViewById(R.id.tv_code2)
         but3 = v.findViewById(R.id.but3)
         but4 = v.findViewById(R.id.but4)
-        but1?.setOnClickListener(this)
-        but2?.setOnClickListener(this)
-        but3?.setOnClickListener(this)
-        but4?.setOnClickListener(this)
+        but1?.setOnClickListener {
+            if (tv_code1?.tag != null) {
+                UdpUtil.getInstance().sendUdpCommand(tv_code1?.tag.toString())
+            }
+            playRaw()
+            playAn(it)
+        }
+        but2?.setOnClickListener {
+            if (tv_code2?.tag != null) {
+                UdpUtil.getInstance().sendUdpCommand(tv_code2?.tag.toString())
+            }
+            playRaw()
+            playAn(it)
+        }
+        but3?.setOnClickListener {
+            showPop(v, "hzh")
+            playRaw()
+            playAn(it)
+        }
+        but4?.setOnClickListener {
+            showPop(v, "yykz")
+            playRaw()
+            playAn(it)
+        }
 
         //循环找控件
         viewArrayId.forEachIndexed { index, i ->
@@ -164,35 +184,6 @@ class MainFragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
                 true
             }
         }
-//        myAdapter?.setOnItemLongClickListener { _, _, position ->
-//            val item = myAdapter?.getItem(position)
-//            if (isEdit) {
-////                if (item?.id != "1" && item?.id != "5" && item?.id != "6") {
-//                showCustomDialog(myAdapter!!.getItem(position))
-////                }
-//            }
-//            true
-//        }
-//        myAdapter?.setOnItemClickListener() { adapter, view, position ->
-//            val item = myAdapter?.getItem(position)
-//            when (item?.id) {
-//                "1" -> {
-//                    showPop(view, "kg")
-//                }
-//                "5" -> {
-//                    showPop(view, "DJ")
-//                }
-//                "6" -> {
-//                    showPop(view, "cjx")
-//                }
-//                else -> {
-//                    UdpUtil.getInstance().sendUdpCommand(myAdapter?.getItem(position)?.code)
-//                }
-//            }
-//            playRaw()
-//            playAn(view)
-//
-//        }
         initData()
         mediaPlayer = MediaPlayer.create(context, R.raw.tt)
         but1?.setOnLongClickListener {
@@ -259,7 +250,6 @@ class MainFragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
                         }
 
                     }
-//                    break
                 }
             }
         }
@@ -326,40 +316,6 @@ class MainFragment : Fragment(), View.OnClickListener, CustomDialog.OnButtonClic
             }
     }
 
-    override fun onClick(v: View?) {
-        playRaw()
-        when (v?.id) {
-            R.id.but1 -> {
-                try {
-                    if (tv_code1?.tag != null) {
-                        UdpUtil.getInstance().sendUdpCommand(tv_code1?.tag.toString())
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-            R.id.but2 -> {
-                try {
-                    if (tv_code2?.tag != null) {
-                        UdpUtil.getInstance().sendUdpCommand(tv_code2?.tag.toString())
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-            R.id.but3 -> {
-                playRaw()
-                playAn(v)
-                showPop(v, "hzh")
-            }
-            R.id.but4 -> {
-                playRaw()
-                playAn(v)
-                showPop(v, "yykz")
-            }
-
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
